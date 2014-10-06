@@ -1,0 +1,656 @@
+{
+    "entity_name": "asd", 
+    "author": "aasd", 
+    "stimuli": [], 
+    "reports": [], 
+    "neurons": [
+        {
+            "$$hashKey": "01T", 
+            "entity_name": "neuron0", 
+            "parameters": {
+                "a": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "c": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": -65, 
+                    "minValue": 0
+                }, 
+                "b": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "d": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 8, 
+                    "minValue": 0
+                }, 
+                "className": "izhikevichParam", 
+                "u": {
+                    "entity_type": "uniform", 
+                    "maxValue": -11, 
+                    "value": 0, 
+                    "minValue": -15
+                }, 
+                "v": {
+                    "entity_type": "uniform", 
+                    "maxValue": -55, 
+                    "value": 0, 
+                    "minValue": -75
+                }, 
+                "threshold": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }
+            }, 
+            "entity_type": "Izhikevich", 
+            "dbType": "Personal", 
+            "className": "neuron"
+        }, 
+        {
+            "$$hashKey": "01V", 
+            "parameters": {
+                "a": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "c": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": -65, 
+                    "minValue": 0
+                }, 
+                "b": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "d": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 8, 
+                    "minValue": 0
+                }, 
+                "className": "izhikevichParam", 
+                "u": {
+                    "entity_type": "uniform", 
+                    "maxValue": -11, 
+                    "value": 0, 
+                    "minValue": -15
+                }, 
+                "v": {
+                    "entity_type": "uniform", 
+                    "maxValue": -55, 
+                    "value": 0, 
+                    "minValue": -75
+                }, 
+                "threshold": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }
+            }, 
+            "entity_name": "neuron1", 
+            "entity_type": "Izhikevich", 
+            "dbType": "Personal"
+        }, 
+        {
+            "$$hashKey": "020", 
+            "parameters": {
+                "tauMembrane": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }, 
+                "spikeShape": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }, 
+                "calciumSpikeIncrement": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 8, 
+                    "minValue": 0
+                }, 
+                "className": "ncsParam", 
+                "calcium": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": -65, 
+                    "minValue": 0
+                }, 
+                "rMembrane": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }, 
+                "channel": [
+                    {
+                        "vHalf": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "$$hashKey": "01X", 
+                        "entity_name": "Voltage Gated Ion Channel", 
+                        "equilibriumSlope": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "activationSlope": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "className": "voltageGatedIonChannel", 
+                        "conductance": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "r": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "deactivationSlope": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "reversalPotential": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "mInitial": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }
+                    }
+                ], 
+                "tauCalcium": {
+                    "entity_type": "uniform", 
+                    "maxValue": -11, 
+                    "value": 0, 
+                    "minValue": -15
+                }, 
+                "threshold": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "restingPotential": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "leakReversalPotential": {
+                    "entity_type": "uniform", 
+                    "maxValue": -55, 
+                    "value": 0, 
+                    "minValue": -75
+                }
+            }, 
+            "entity_name": "neuron2", 
+            "entity_type": "NCS", 
+            "dbType": "Personal"
+        }, 
+        {
+            "$$hashKey": "02B", 
+            "parameters": {
+                "a": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "c": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": -65, 
+                    "minValue": 0
+                }, 
+                "b": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "d": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 8, 
+                    "minValue": 0
+                }, 
+                "className": "izhikevichParam", 
+                "u": {
+                    "entity_type": "uniform", 
+                    "maxValue": -11, 
+                    "value": 0, 
+                    "minValue": -15
+                }, 
+                "v": {
+                    "entity_type": "uniform", 
+                    "maxValue": -55, 
+                    "value": 0, 
+                    "minValue": -75
+                }, 
+                "threshold": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }
+            }, 
+            "entity_name": "neuron3", 
+            "entity_type": "Izhikevich", 
+            "dbType": "Personal"
+        }, 
+        {
+            "$$hashKey": "02G", 
+            "entity_name": "neuron4", 
+            "parameters": {
+                "className": "hodgkinHuxleyParam", 
+                "threshold": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }, 
+                "restingPotential": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }, 
+                "capacitance": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }, 
+                "channel": [
+                    {
+                        "vHalf": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "$$hashKey": "02D", 
+                        "entity_name": "Voltage Gated Ion Channel", 
+                        "equilibriumSlope": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "activationSlope": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "className": "voltageGatedIonChannel", 
+                        "conductance": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "r": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "deactivationSlope": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "reversalPotential": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "mInitial": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }
+                    }
+                ]
+            }, 
+            "entity_type": "HodgkinHuxley", 
+            "dbType": "Personal", 
+            "className": "neuron"
+        }, 
+        {
+            "$$hashKey": "02K", 
+            "parameters": {
+                "tauMembrane": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }, 
+                "spikeShape": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }, 
+                "calciumSpikeIncrement": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 8, 
+                    "minValue": 0
+                }, 
+                "className": "ncsParam", 
+                "calcium": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": -65, 
+                    "minValue": 0
+                }, 
+                "rMembrane": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }, 
+                "channel": [
+                    {
+                        "vHalf": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "$$hashKey": "01X", 
+                        "entity_name": "Voltage Gated Ion Channel", 
+                        "equilibriumSlope": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "activationSlope": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "className": "voltageGatedIonChannel", 
+                        "conductance": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "r": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "deactivationSlope": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "reversalPotential": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "mInitial": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }
+                    }
+                ], 
+                "tauCalcium": {
+                    "entity_type": "uniform", 
+                    "maxValue": -11, 
+                    "value": 0, 
+                    "minValue": -15
+                }, 
+                "threshold": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "restingPotential": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "leakReversalPotential": {
+                    "entity_type": "uniform", 
+                    "maxValue": -55, 
+                    "value": 0, 
+                    "minValue": -75
+                }
+            }, 
+            "entity_name": "neuron5", 
+            "entity_type": "NCS", 
+            "dbType": "Personal"
+        }, 
+        {
+            "$$hashKey": "02Q", 
+            "entity_name": "neuron6", 
+            "parameters": {
+                "tauMembrane": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }, 
+                "spikeShape": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }, 
+                "calciumSpikeIncrement": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 8, 
+                    "minValue": 0
+                }, 
+                "className": "ncsParam", 
+                "calcium": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": -65, 
+                    "minValue": 0
+                }, 
+                "rMembrane": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }, 
+                "channel": [
+                    {
+                        "vHalf": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "$$hashKey": "01X", 
+                        "entity_name": "Voltage Gated Ion Channel", 
+                        "equilibriumSlope": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "activationSlope": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "className": "voltageGatedIonChannel", 
+                        "conductance": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "r": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "deactivationSlope": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "reversalPotential": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }, 
+                        "mInitial": {
+                            "entity_type": "exact", 
+                            "maxValue": 0, 
+                            "value": 30, 
+                            "minValue": 0
+                        }
+                    }
+                ], 
+                "tauCalcium": {
+                    "entity_type": "uniform", 
+                    "maxValue": -11, 
+                    "value": 0, 
+                    "minValue": -15
+                }, 
+                "threshold": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "restingPotential": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "leakReversalPotential": {
+                    "entity_type": "uniform", 
+                    "maxValue": -55, 
+                    "value": 0, 
+                    "minValue": -75
+                }
+            }, 
+            "entity_type": "NCS", 
+            "dbType": "Personal", 
+            "className": "neuron"
+        }, 
+        {
+            "$$hashKey": "02S", 
+            "entity_name": "asd", 
+            "parameters": {
+                "a": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "c": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": -65, 
+                    "minValue": 0
+                }, 
+                "b": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 0.2, 
+                    "minValue": 0
+                }, 
+                "d": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 8, 
+                    "minValue": 0
+                }, 
+                "className": "izhikevichParam", 
+                "u": {
+                    "entity_type": "uniform", 
+                    "maxValue": -11, 
+                    "value": 0, 
+                    "minValue": -15
+                }, 
+                "v": {
+                    "entity_type": "uniform", 
+                    "maxValue": -55, 
+                    "value": 0, 
+                    "minValue": -75
+                }, 
+                "threshold": {
+                    "entity_type": "exact", 
+                    "maxValue": 0, 
+                    "value": 30, 
+                    "minValue": 0
+                }
+            }, 
+            "entity_type": "Izhikevich", 
+            "dbType": "Personal", 
+            "className": "neuron"
+        }
+    ], 
+    "synapses": [], 
+    "neuron_aliases": [], 
+    "groups": [], 
+    "description": "aasdaomnwdamnowdaonwdaqsdaweirtfgnaionrgionw ikwejmfown"
+}

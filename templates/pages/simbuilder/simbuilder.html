@@ -1,0 +1,18 @@
+<!-- Main DIV containing the modularized pieces of the simulation builder tab -->
+<div id="simulation" class="container">
+
+    <!-- Heading for Simulation Builder Tab -->
+    <div class="page-header">
+        <button type="button" id="stopSimButton" href="#" class="btn btn-danger btn-md pull-right" style="margin-right:5px;">
+        Stop Simulation</button>
+        <button type="button" id="launchSimButton" href="#" class="btn btn-success btn-md pull-right" style="margin-right:5px">Launch Simulation</button>
+        <h3>Simulation Configuration</h3>
+    </div>
+    <!-- End Heading for Simulation Builder Tab -->
+    
+    <!-- Modularized components of Simulation Builder Tab -->
+    {% include 'pages/simbuilder/components/parameters.html' %}
+    <!-- End Modularized components -->
+    
+</div>
+<!-- End Main DIV -->
