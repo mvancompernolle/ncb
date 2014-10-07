@@ -1,0 +1,21 @@
+.ncb-drawer-margin {
+	margin: 5px;
+}
+
+.ncb-drawer-row {
+	padding-top: 10px;
+}
+
+.ncb-drawer-btngroup {
+	width: 100%;
+}
+
+.ncb-drawer-groupbtn {
+	width: 33%;
+}
+
+#noResults {
+	display: block;
+    text-align: center;
+    line-height: 150%;
+}
