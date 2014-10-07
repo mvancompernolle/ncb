@@ -1,7 +1,7 @@
-#modelbuilder_modelselector_modellist {
-    //overflow-x: hidden;
-    //overflow-y: scroll;
-    max-height:400px;
+#currentModelName {
+	position: absolute;
 }
 
-
+#addCellGroup {
+	margin-right: 5px;
+}

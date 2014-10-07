@@ -1,42 +1,48 @@
 <!-- Main Div for containing the Model Builder page -->
     <div class="row">
         <div class="col-lg-12">
-            <button class="btn btn-info pull-right" type="button" style="margin: 5px">Import</button>
-            <button class="btn btn-info pull-right" type="button" style="margin: 5px">Export</button>
+            <button class="btn btn-info pull-right ncb-drawer-margin" type="button">Import</button>
+            <button class="btn btn-info pull-right ncb-drawer-margin" type="button">Export</button>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
             <label>Search Models</label>
-            <input type="text" class="form-control" id="modelbuilder_filterinput" placeholder="Search" data-ng-model="searchText" data-ng-model="searchType">
+            <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
         </div>
     </div>
-    <div class="row" style="padding-top : 10px">
+    <div class="row ncb-drawer-row">
         <div class="col-lg-12">
-            <div class="btn-group" style="width: 100%">
-              <button type="button" class="btn btn-default" style="width: 33%" ng-click="drawerCtrl.setTab(0)">All</button>
-              <button type="button" class="btn btn-default" style="width: 33%" ng-click="drawerCtrl.setTab(1)" data-ng-model="searchType.dbType" ng-value="Personal">Local</button>
-              <button type="button" class="btn btn-default" style="width: 33%" ng-click="drawerCtrl.setTab(2)" data-ng-model="searchType.dbType" ng-value="Database" >Database</button>
+            <div class="btn-group ncb-drawer-btngroup">
+              <button type="button" class="btn btn-default ncb-drawer-groupbtn" ng-class="{active: drawerCtrl.isSelected(0)}" ng-click="drawerCtrl.selectTab(0)">All</button>
+              <button type="button" class="btn btn-default ncb-drawer-groupbtn" ng-class="{active: drawerCtrl.isSelected(1)}" ng-click="drawerCtrl.selectTab(1)">Local</button>
+              <button type="button" class="btn btn-default ncb-drawer-groupbtn" ng-class="{active: drawerCtrl.isSelected(2)}" ng-click="drawerCtrl.selectTab(2)">Database</button>
             </div>
         </div>
     </div>
-    <div class="row" style="padding-top : 10px">
+    <div class="row ncb-drawer-row">
         <div class="col-lg-12">
 
-            <span class="label label-default" style="display:block;">Local</span>
+            <label id="noResults" ng-show="(drawerCtrl.isSelected(0) && localFiltered.length == 0 && dbFiltered.length == 0) || (drawerCtrl.isSelected(1) && localFiltered.length == 0) || (drawerCtrl.isSelected(2) && dbFiltered.length == 0)">No Search Results</label>
 
-            <ul id="modelList" class="list-group">
+            <span class="label label-default" style="display:block;" ng-show="(drawerCtrl.isSelected(0) || drawerCtrl.isSelected(1)) && localFiltered.length > 0">Local</span>
+            <div class="list-group ncb-no-margins" ng-show="drawerCtrl.isSelected(0) || drawerCtrl.isSelected(1)" ng-repeat="model in localFiltered = (drawerCtrl.localModels | filter : searchText)">
+                <a class="list-group-item">{{ '{{model}}' }}</a>
+            </div>
+            <!--<ul>
                         
                 <a href="" class="list-group-item modelElement" data-ng-repeat="model in list | filter: searchText | filter:searchType | orderBy: 'model.name'" ng-dblclick="moveModel(model.name)" ng-style="styleModel(model.dbType, model_color)" ng-mousedown="setModel(model.name)" title="{{'{{modelPopover.title}}'}}" data-content="{{'{{modelPopover.content}}'}}" ng-init="path=getTemplate(model.type)" ng-model="path" data-template="{{'{{path}}'}}" data-trigger="click" bs-popover>{{ '{{ model.name }}'  }}</a>
                         
-            </ul>
-             <span class="label label-default" style="display:block;">Database</span>
-
-             <ul id="modelList" class="list-group">
+            </ul>-->
+            <span class="label label-default" style="display:block;" ng-show="(drawerCtrl.isSelected(0) || drawerCtrl.isSelected(2)) && dbFiltered.length > 0">Database</span>
+            <div class="list-group ncb-no-margins" ng-show="drawerCtrl.isSelected(0) || drawerCtrl.isSelected(2)" ng-repeat="model in dbFiltered = (drawerCtrl.dbModels | filter : searchText)">
+                 <a class="list-group-item">{{ '{{model}}' }}</a>
+            </div>
+             <!--<ul>
                         
                 <a href="" class="list-group-item modelElement" data-ng-repeat="model in list | filter: searchText | filter:searchType | orderBy: 'model.name'" ng-dblclick="moveModel(model.name)" ng-style="styleModel(model.dbType, model_color)" ng-mousedown="setModel(model.name)" title="{{'{{modelPopover.title}}'}}" data-content="{{'{{modelPopover.content}}'}}" ng-init="path=getTemplate(model.type)" ng-model="path" data-template="{{'{{path}}'}}" data-trigger="click" bs-popover>{{ '{{ model.name }}'  }}</a>
                         
-            </ul>
+            </ul>-->
         </div>
 
     </div>  

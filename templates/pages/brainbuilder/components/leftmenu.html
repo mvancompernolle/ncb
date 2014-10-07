@@ -1,33 +1,31 @@
 <!-- LEFT MENU -->
-<div class="col-lg-4">
 
-    <!-- Current model list which contains the list of models a user is working on -->
-	<div id="currentModelList" class="panel panel-default" >
-		<div class="panel-heading" style="height:40px">
-            <div id="currentModelName" style="position:absolute;">
-                Current Model
-            </div>
-            <button type="button" data-toggle="modal" id="#addElement" class="btn btn-xs btn-info pull-right">+ Element</button>
-            <button type="button" data-toggle="modal" style="margin-right:5px;" class="btn btn-xs btn-info pull-right"> Edit  </button>
-		</div>
-		<div>
-			<ol id="bread" class="breadcrumb" ng-breadcrumbs>
-	  			<li><a id="bc1" class="active" href="javascript:">Home</a></li>
-			</ol>
-		</div>
-		
-		<!-- filtering is done here -->
-		<div class="panel-body" >
-			<ul id="modelList2" class="list-group">
-
-							
-			</ul>
-		</div>
-		<!-- end filtering -->
-		
+<!-- Current model list which contains the list of models a user is working on -->
+<div id="currentModelList" class="panel panel-default ncb-full-panel" >
+	<div class="panel-heading ncb-heading">
+        <div id="currentModelName">
+            Current Model
+        </div>
+        <button type="button" data-toggle="modal" id="#addCell" class="btn btn-xs btn-info pull-right">+ Cell</button>
+        <button type="button" data-toggle="modal" id="addCellGroup" class="btn btn-xs btn-info pull-right">+ Cell Group</button>
 	</div>
-	<!-- end current model list -->
+	<div>
+		<ol id="bread" class="breadcrumb" ng-breadcrumbs>
+  			<li><a id="bc1" class="active" href="javascript:">Home</a></li>
+		</ol>
+	</div>
 	
-</div>  
+	<!-- filtering is done here -->
+	<div class="panel-body" >
+		<ul>
+
+						
+		</ul>
+	</div>
+	<!-- end filtering -->
+	
+</div>
+<!-- end current model list -->
+	
 <!-- LEFT MENU END -->
 

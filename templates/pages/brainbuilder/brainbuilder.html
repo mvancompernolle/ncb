@@ -18,8 +18,14 @@
 	
 
 	<!-- Modularization of Each Element of the page broken up into pieces -->
-    {% include 'pages/brainbuilder/components/leftmenu.html' %}
-    {% include 'pages/brainbuilder/components/rightmenu.html' %}
+    <div class="row">
+        <div class="col-lg-4">
+            {% include 'pages/brainbuilder/components/leftmenu.html' %}
+        </div>
+        <div class="col-lg-8">
+            {% include 'pages/brainbuilder/components/rightmenu.html' %}
+        </div>
+    </div>
     <!-- End Modularization -->
 </div>
 <!-- End Main Div -->

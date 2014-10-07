@@ -1,17 +1,36 @@
 <!-- Main DIV containing the modularized pieces of the simulation builder tab -->
 <div id="simulation" class="container">
 
-    <!-- Heading for Simulation Builder Tab -->
+    <!-- Model Configuration Header -->
     <div class="page-header">
-        <button type="button" id="stopSimButton" href="#" class="btn btn-danger btn-md pull-right" style="margin-right:5px;">
-        Stop Simulation</button>
-        <button type="button" id="launchSimButton" href="#" class="btn btn-success btn-md pull-right" style="margin-right:5px">Launch Simulation</button>
-        <h3>Simulation Configuration</h3>
+        <div class="row">
+            <div class='col-lg-12'>
+                <h3>
+                <button type="button" class="btn btn-default" snap-toggle="left">
+                    <span class="glyphicon glyphicon-th-list"></span>
+                </button>
+                <button type="button" id="launchSimButton" href="#" class="btn btn-success btn-md pull-right">Launch Simulation</button>
+               Simulation Configuration
+                </h3>
+            </div>
+        </div>
     </div>
-    <!-- End Heading for Simulation Builder Tab -->
+    <!-- End Header -->
     
     <!-- Modularized components of Simulation Builder Tab -->
-    {% include 'pages/simbuilder/components/parameters.html' %}
+    <div class="row">
+        <div class="col-lg-12">
+            {% include 'pages/simbuilder/components/parameters.html' %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            {% include 'pages/simbuilder/components/ioselector.html' %}
+        </div>
+        <div class="col-lg-8">
+            {% include 'pages/simbuilder/components/iospecification.html' %}  
+        </div>  
+    </div>
     <!-- End Modularized components -->
     
 </div>
