@@ -7,13 +7,27 @@ ncbApp.config(function(snapRemoteProvider) {
     snapRemoteProvider.globalOptions = {
       disable: 'right',
       hyperextensible: false,
-      touchToDrag: false
+      touchToDrag: false,
+      tapToClose: false
       // ... others options
     }
 });
 
+// create side panel service 
+ncbApp.factory('sidePanelService', function($rootScope) {
+  var sidePanelService = {};
 
-ncbApp.controller("DrawerController", function(){
+  sidePanelService.visible = false;
+
+  sidePanelService.setVisible = function(isVisible) {
+    this.visible = isVisible;
+  };
+
+  return sidePanelService;
+});
+
+
+ncbApp.controller("DrawerController", ['sidePanelService', function(sidePanelService){
 	this.tab = 0;
 	this.localModels = [{name: 'Cell 1', classification:'cell'} ,{name: 'Cell Group 2', classification:'cellGroup'}, {name: 'Model 1', classification:'model'}, {name: 'Cell 3', classification:'cell'}];
 	this.dbModels = [{name: 'Cell 4', classification:'cell'} ,{name: 'Cell Group 5', classification:'cellGroup'}, {name: 'Model 3', classification:'model'}, {name: 'Cell 6', classification:'cell'}];
@@ -32,7 +46,6 @@ ncbApp.controller("DrawerController", function(){
 		return this.tab === checkTab;
 	}
 
-	
 	this.styleElement = function(model){
 
 		// style element based off type (cell, cell group, model)
@@ -66,6 +79,33 @@ ncbApp.controller("DrawerController", function(){
 		}
 	}
 
+	this.quickView = function(){
+		sidePanelService.setVisible(true);
+	}
 	
-});
+}]);
 
+
+ncbApp.controller("SidePanelController", ['$scope', 'sidePanelService', function($scope, sidePanelService){
+	// get visibility from side panel service
+	this.isSidePanelVisible = function(){
+		return sidePanelService.visible;
+	};
+
+	// call this to close side panel
+	this.close = function(){
+		sidePanelService.setVisible(false);
+	};
+}]);
+
+ncbApp.controller("NavigationController", ['$scope', 'sidePanelService', function($scope, sidePanelService){
+	// get visibility from side panel service
+	this.isSidePanelVisible = function(){
+		return sidePanelService.visible;
+	};
+
+	// call this to close side panel
+	this.hideSidePanel = function(){
+		sidePanelService.setVisible(false);
+	};
+}]);

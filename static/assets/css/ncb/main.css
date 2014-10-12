@@ -20,6 +20,13 @@
     height:600px;
 }
 
+.ncb-side-panel {
+   height:700px; 
+   width: 100%;
+   margin-left: 6px;
+   margin-top: 60px;
+}
+
 .ncb-heading {
     height:40px;
 }

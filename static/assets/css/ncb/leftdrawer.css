@@ -20,6 +20,11 @@
     line-height: 150%;
 }
 
+.ncb-left-drawer {
+    background-color : #f8f8f8;
+    padding: 5px;
+}
+
 
 .right-inner-addon {
     position: relative;
