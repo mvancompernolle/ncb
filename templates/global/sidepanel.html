@@ -2,13 +2,17 @@
 
 <!-- Current model list which contains the list of models a user is working on -->
 <div class="panel panel-default ncb-side-panel" ng-show="sideCtrl.isSidePanelVisible()" >
-	<div class="panel-heading ncb-heading">
+	<div class="panel-heading ncb-heading" ng-style="sideCtrl.styleElement()">
         <div id="currentModelName">
-            Current Model
+            {{ '{{data.name}}' }}
         </div>
         <button type="button" ng-click="sideCtrl.close()" class="btn btn-xs btn-danger pull-right">x</button>
 	</div>
-	
+	<div>
+		<ol id="bread" class="breadcrumb" ng-breadcrumbs>
+  			<li><a id="bc1" class="active" href="javascript:">Home</a></li>
+		</ol>
+	</div>
 	<!-- filtering is done here -->
 	<div class="panel-body" >
 		<ul>

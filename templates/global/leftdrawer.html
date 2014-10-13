@@ -1,7 +1,7 @@
 <!-- Main Div for containing the Model Builder page -->
     <div class="row">
         <div class="col-lg-2">
-            <button type="button" class="btn btn-default ncb-drawer-margin" title="{{ '{{drawerCtrl.colorPickerPopover.title}}' }}" data-content="{{ '{{drawerCtrl.colorPickerPopover.content}}' }}" data-template="assets/html/colorpicker-popover.html" data-trigger="click" data-placement="bottom-left" bs-popover> <span class="glyphicon glyphicon-cog"></span></button>
+            <button type="button" class="btn btn-default ncb-drawer-margin" title="{{ '{{drawerCtrl.colorPickerPopover.title}}' }}" data-content="{{ '{{drawerCtrl.colorPickerPopover.content}}' }}" data-template="assets/html/colorpicker-popover.html" data-trigger="click" data-placement="bottom-left"  bs-popover> <span class="glyphicon glyphicon-cog"></span></button>
         </div>
         <div class="col-lg-10">
             <button class="btn btn-info pull-right ncb-drawer-margin" type="button">Import</button>
@@ -33,7 +33,7 @@
             <span class="label label-default" style="display:block;" ng-show="(drawerCtrl.isSelected(0) || drawerCtrl.isSelected(1)) && localFiltered.length > 0">Local</span>
             <div class="list-group ncb-no-margins" ng-show="drawerCtrl.isSelected(0) || drawerCtrl.isSelected(1)" ng-repeat="model in localFiltered = (drawerCtrl.localModels | filter : searchText)">
             
-                <a class="list-group-item" ng-style="drawerCtrl.styleElement(model)" href="">{{ '{{model.name}}' }}<button class="btn btn-default btn-xs ncb-borderless-btn pull-right" ng-click="drawerCtrl.quickView()" type="button"><span class="glyphicon glyphicon-eye-open"></span></button></a>
+                <a class="list-group-item" ng-style="drawerCtrl.styleElement(model)" href="">{{ '{{model.name}}' }}<button class="btn btn-default btn-xs ncb-borderless-btn pull-right" ng-click="drawerCtrl.quickView(model)" type="button"><span class="glyphicon glyphicon-eye-open"></span></button></a>
                         
             </div>
             <!--<ul>
@@ -44,7 +44,7 @@
             <span class="label label-default" style="display:block;" ng-show="(drawerCtrl.isSelected(0) || drawerCtrl.isSelected(2)) && dbFiltered.length > 0">Database</span>
             <div class="list-group ncb-no-margins" ng-show="drawerCtrl.isSelected(0) || drawerCtrl.isSelected(2)" ng-repeat="model in dbFiltered = (drawerCtrl.dbModels | filter : searchText)">
 
-                 <a class="list-group-item" ng-style="drawerCtrl.styleElement(model)" href="">{{ '{{model.name}}' }}<button class="btn btn-default btn-xs ncb-borderless-btn pull-right" ng-click="drawerCtrl.quickView()" type="button"><span class="glyphicon glyphicon-eye-open"></span></button></a>
+                 <a class="list-group-item" ng-style="drawerCtrl.styleElement(model)" href="">{{ '{{model.name}}' }}<button class="btn btn-default btn-xs ncb-borderless-btn pull-right" ng-click="drawerCtrl.quickView(model)" type="button"><span class="glyphicon glyphicon-eye-open"></span></button></a>
                             
              <!--<ul>
                         
