@@ -33,24 +33,42 @@
             <span class="label label-default" style="display:block;" ng-show="(drawerCtrl.isSelected(0) || drawerCtrl.isSelected(1)) && localFiltered.length > 0">Local</span>
             <div class="list-group ncb-no-margins" ng-show="drawerCtrl.isSelected(0) || drawerCtrl.isSelected(1)" ng-repeat="model in localFiltered = (drawerCtrl.localModels | filter : searchText)">
             
-                <a class="list-group-item" ng-style="drawerCtrl.styleElement(model)" href="">{{ '{{model.name}}' }}<button class="btn btn-default btn-xs ncb-borderless-btn pull-right" ng-click="drawerCtrl.quickView(model)" type="button"><span class="glyphicon glyphicon-eye-open"></span></button></a>
+                <div ng-style="drawerCtrl.styleElement(model)" class="list-group-item ncb-cell-list-item">
+                    <div class="row">
+                        <div class="col-lg-12"
+                            <a class="ncb-cell-name-txt ncb-list-text-color" href="">{{ '{{model.name}}' }}<button class="btn btn-default btn-xs ncb-borderless-btn pull-right " ng-click="drawerCtrl.quickView(model)" type="button"><span class="glyphicon glyphicon-eye-open"></span></button></a>
+                        </div>
+                    </div>
+                    <div class="row ncb-default-blank-row">
+                        <div class="col-lg-12 ">
+                            <a ng-show="model.classification == 'cell'"class="ncb-cell-type-txt" href="">{{ '{{model.type}}' }}</a>
+                            <a ng-show="model.classification == 'cellGroup'"class="ncb-cell-type-txt" href="">Cell Group</a>
+                            <a ng-show="model.classification == 'model'"class="ncb-cell-type-txt" href="">Model</a>
+                        </div>
+                    </div>
+                </div>
                         
             </div>
-            <!--<ul>
-                        
-                <a href="" class="list-group-item modelElement" data-ng-repeat="model in list | filter: searchText | filter:searchType | orderBy: 'model.name'" ng-dblclick="moveModel(model.name)" ng-style="styleModel(model.dbType, model_color)" ng-mousedown="setModel(model.name)" title="{{'{{modelPopover.title}}'}}" data-content="{{'{{modelPopover.content}}'}}" ng-init="path=getTemplate(model.type)" ng-model="path" data-template="{{'{{path}}'}}" data-trigger="click" bs-popover>{{ '{{ model.name }}'  }}</a>
-                        
-            </ul>-->
+
             <span class="label label-default" style="display:block;" ng-show="(drawerCtrl.isSelected(0) || drawerCtrl.isSelected(2)) && dbFiltered.length > 0">Database</span>
             <div class="list-group ncb-no-margins" ng-show="drawerCtrl.isSelected(0) || drawerCtrl.isSelected(2)" ng-repeat="model in dbFiltered = (drawerCtrl.dbModels | filter : searchText)">
 
-                 <a class="list-group-item" ng-style="drawerCtrl.styleElement(model)" href="">{{ '{{model.name}}' }}<button class="btn btn-default btn-xs ncb-borderless-btn pull-right" ng-click="drawerCtrl.quickView(model)" type="button"><span class="glyphicon glyphicon-eye-open"></span></button></a>
+                <div ng-style="drawerCtrl.styleElement(model)" class="list-group-item ncb-cell-list-item">
+                    <div class="row">
+                        <div class="col-lg-12"
+                            <a class="ncb-cell-name-txt ncb-list-text-color" href="">{{ '{{model.name}}' }}<button class="btn btn-default btn-xs ncb-borderless-btn pull-right " ng-click="drawerCtrl.quickView(model)" type="button"><span class="glyphicon glyphicon-eye-open"></span></button></a>
+                        </div>
+                    </div>
+                    <div class="row ncb-default-blank-row">
+                        <div class="col-lg-12 ">
+                            <a ng-show="model.classification == 'cell'"class="ncb-cell-type-txt" href="">{{ '{{model.type}}' }}</a>
+                            <a ng-show="model.classification == 'cellGroup'"class="ncb-cell-type-txt" href="">Cell Group</a>
+                            <a ng-show="model.classification == 'model'"class="ncb-cell-type-txt" href="">Model</a>
+                        </div>
+                    </div>
+                </div>
+
                             
-             <!--<ul>
-                        
-                <a href="" class="list-group-item modelElement" data-ng-repeat="model in list | filter: searchText | filter:searchType | orderBy: 'model.name'" ng-dblclick="moveModel(model.name)" ng-style="styleModel(model.dbType, model_color)" ng-mousedown="setModel(model.name)" title="{{'{{modelPopover.title}}'}}" data-content="{{'{{modelPopover.content}}'}}" ng-init="path=getTemplate(model.type)" ng-model="path" data-template="{{'{{path}}'}}" data-trigger="click" bs-popover>{{ '{{ model.name }}'  }}</a>
-                        
-            </ul>-->
         </div>
 
     </div>  

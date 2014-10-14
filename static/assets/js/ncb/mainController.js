@@ -56,8 +56,8 @@ ncbApp.controller("DrawerController", ['$scope', 'sidePanelService', 'colorServi
 	$scope.viewed = sidePanelService.getData();
 	$scope.colors = colorService.getColors();
 	this.tab = 0;
-	this.localModels = [{name: 'Cell 1', classification:'cell'} ,{name: 'Cell Group 2', classification:'cellGroup'}, {name: 'Model 1', classification:'model'}, {name: 'Cell 3', classification:'cell'}];
-	this.dbModels = [{name: 'Cell 4', classification:'cell'} ,{name: 'Cell Group 5', classification:'cellGroup'}, {name: 'Model 3', classification:'model'}, {name: 'Cell 6', classification:'cell'}];
+	this.localModels = [{name: 'Cell 1', classification:'cell', type: 'Izhikevich'} ,{name: 'Cell Group 2', classification:'cellGroup'}, {name: 'Model 1', classification:'model'}, {name: 'Cell 3', classification:'cell', type: 'Izhikevich'}];
+	this.dbModels = [{name: 'Cell 4', classification:'cell', type: 'Hodgkin Huxley'} ,{name: 'Cell Group 5', classification:'cellGroup'}, {name: 'Model 3', classification:'model'}, {name: 'Cell 6', classification:'cell', type: 'NCS'}];
 
 	this.colorPickerPopover = {
   		"title": "Title",
@@ -76,28 +76,20 @@ ncbApp.controller("DrawerController", ['$scope', 'sidePanelService', 'colorServi
 		// style element based off type (cell, cell group, model)
 		if (model.classification === 'cell'){
 			return {
-                    'background-image': 'linear-gradient(left, '+$scope.colors.cell+', '+$scope.colors.cell+' 5%, transparent 5%, transparent 100%)',
-                    'background-image': '-webkit-linear-gradient(left, '+$scope.colors.cell+', '+$scope.colors.cell+' 5%, transparent 5%, transparent 100%)',
-                    'color': $scope.colors.cell
-
+                'background-image': 'linear-gradient(left, '+$scope.colors.cell+', '+$scope.colors.cell+' 5%, transparent 5%, transparent 100%)',
+                'background-image': '-webkit-linear-gradient(left, '+$scope.colors.cell+', '+$scope.colors.cell+' 5%, transparent 5%, transparent 100%)',
             };
 		}
 		else if (model.classification === 'cellGroup'){
 			return {
-
-                    'background-image': 'linear-gradient(left, '+$scope.colors.cellGroup+', '+$scope.colors.cellGroup+' 5%, transparent 5%, transparent 100%)',
-                    'background-image': '-webkit-linear-gradient(left, '+$scope.colors.cellGroup+', '+$scope.colors.cellGroup+' 5%, transparent 5%, transparent 100%)',
-                    'color': $scope.colors.cellGroup
-
+                'background-image': 'linear-gradient(left, '+$scope.colors.cellGroup+', '+$scope.colors.cellGroup+' 5%, transparent 5%, transparent 100%)',
+                'background-image': '-webkit-linear-gradient(left, '+$scope.colors.cellGroup+', '+$scope.colors.cellGroup+' 5%, transparent 5%, transparent 100%)',
             };
 		}
 		else if (model.classification === 'model'){
 			return {
-
-                    'background-image': 'linear-gradient(left, '+$scope.colors.model+', '+$scope.colors.model+' 5%, transparent 5%, transparent 100%)',
-                    'background-image': '-webkit-linear-gradient(left, '+$scope.colors.model+', '+$scope.colors.model+' 5%, transparent 5%, transparent 100%)',
-                    'color': $scope.colors.model
-
+                'background-image': 'linear-gradient(left, '+$scope.colors.model+', '+$scope.colors.model+' 5%, transparent 5%, transparent 100%)',
+                'background-image': '-webkit-linear-gradient(left, '+$scope.colors.model+', '+$scope.colors.model+' 5%, transparent 5%, transparent 100%)',
             };
 		}
 	}
