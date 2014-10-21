@@ -14,6 +14,7 @@
 
 #bread {
 	font-size: 10px;
+  margin-bottom: 0px;
 }
 
 .ncb-full-panel {
@@ -82,5 +83,10 @@
 
 .ncb-default-blank-row {
   min-height: 20px;
+}
+
+#addPreview {
+  margin-bottom: 8px;
+  width: 100%;
 }
 

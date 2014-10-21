@@ -51,6 +51,23 @@ ncbApp.factory('colorService', function($rootScope){
 	return colorService;
 });
 
+ncbApp.factory('currentModelService', function($rootScope){
+	var currentModelService = {};
+
+	// store current model in service so it can be accessed anywhere
+	this.currentModel = new currentWorkingModel();
+
+	currentModelService.addToModel = function(model){
+		this.currentModel.insert(model);
+	};
+
+	currentModelService.getCurrentModel = function(){
+		return this.currentModel;
+	};
+
+	return currentModelService;
+});
+
 
 ncbApp.controller("DrawerController", ['$scope', 'sidePanelService', 'colorService', function($scope, sidePanelService, colorService){
 	$scope.viewed = sidePanelService.getData();
@@ -121,6 +138,10 @@ ncbApp.controller("SidePanelController", ['$scope', 'sidePanelService', 'colorSe
 	// call this to close side panel
 	this.close = function(){
 		sidePanelService.setVisible(false);
+	};
+
+	this.addToModel = function(){
+
 	};
 
 	this.styleElement = function(){
