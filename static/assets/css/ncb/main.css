@@ -85,8 +85,32 @@
   min-height: 20px;
 }
 
+.ncb-full-panel-body {
+  height: 100%;
+}
+
+.ncb-full-row{
+  height: 100%;
+}
+
+.ncb-black-border {
+  border-bottom: 1px;
+}
+
 #addPreview {
   margin-bottom: 8px;
   width: 100%;
+}
+
+#subComponents{
+  margin-bottom: 16px;
+  height: 35%;
+  overflow: auto;
+}
+
+#paramsPreview {
+  margin-bottom: 16px;
+  min-height: 45%;
+  overflow: auto;
 }
 

@@ -14,7 +14,7 @@ ncbApp.config(function(snapRemoteProvider) {
 });
 
 // create side panel service 
-ncbApp.factory('sidePanelService', function($rootScope) {
+ncbApp.factory('SidePanelService', function($rootScope) {
   var sidePanelService = {};
 
   sidePanelService.visible = false;
@@ -35,7 +35,8 @@ ncbApp.factory('sidePanelService', function($rootScope) {
   return sidePanelService;
 });
 
-ncbApp.factory('colorService', function($rootScope){
+// service that provides set website colors
+ncbApp.factory('ColorService', function($rootScope){
 	var colorService = {};
 
 	colorService.colors = {cell: '#8781BD' , cellGroup: '#00568C', model:'#5D6B74'};
@@ -48,17 +49,57 @@ ncbApp.factory('colorService', function($rootScope){
 		this.colors = newColors;
 	};
 
+	colorService.styleElement = function(model){
+		// style element based off type (cell, cell group, model)
+		if (model.classification === 'cell'){
+			return {
+                'background-image': 'linear-gradient(left, '+this.colors.cell+', '+this.colors.cell+' 5%, transparent 5%, transparent 100%)',
+                'background-image': '-webkit-linear-gradient(left, '+this.colors.cell+', '+this.colors.cell+' 5%, transparent 5%, transparent 100%)',
+            };
+		}
+		else if (model.classification === 'cellGroup'){
+			return {
+                'background-image': 'linear-gradient(left, '+this.colors.cellGroup+', '+this.colors.cellGroup+' 5%, transparent 5%, transparent 100%)',
+                'background-image': '-webkit-linear-gradient(left, '+this.colors.cellGroup+', '+this.colors.cellGroup+' 5%, transparent 5%, transparent 100%)',
+            };
+		}
+		else if (model.classification === 'model'){
+			return {
+                'background-image': 'linear-gradient(left, '+this.colors.model+', '+this.colors.model+' 5%, transparent 5%, transparent 100%)',
+                'background-image': '-webkit-linear-gradient(left, '+this.colors.model+', '+this.colors.model+' 5%, transparent 5%, transparent 100%)',
+            };
+		}
+	}
+
 	return colorService;
 });
 
-ncbApp.factory('currentModelService', function($rootScope){
+
+// service that allows the current model to be modified and accessed
+ncbApp.factory('CurrentModelService', function($rootScope){
 	var currentModelService = {};
 
 	// store current model in service so it can be accessed anywhere
-	this.currentModel = new currentWorkingModel();
+	currentModelService.currentModel = new currentWorkingModel();
+
+	currentModelService.setName = function(name){
+		this.currentModel.name = name;
+	};
 
 	currentModelService.addToModel = function(model){
-		this.currentModel.insert(model);
+		// add model componenet if not already in the current model
+		var index = getIndex(this.currentModel.neurons, "name", model.name);
+		if(this.currentModel.neurons.length === 0 || index === -1){
+			this.currentModel.neurons.push(model);
+		}
+	};
+
+	currentModelService.removeModel = function(model){
+		// remove model if found
+		var myIndex = getIndex(this.currentModel.neurons, "name", model.name)
+		if(myIndex != -1){
+			this.currentModel.neurons.splice(myIndex, 1);
+		}
 	};
 
 	currentModelService.getCurrentModel = function(){
@@ -68,13 +109,34 @@ ncbApp.factory('currentModelService', function($rootScope){
 	return currentModelService;
 });
 
-
-ncbApp.controller("DrawerController", ['$scope', 'sidePanelService', 'colorService', function($scope, sidePanelService, colorService){
+// controller for the model import/export drawer
+ncbApp.controller("DrawerController", ['$scope', 'SidePanelService', 'ColorService', function($scope, sidePanelService, colorService){
 	$scope.viewed = sidePanelService.getData();
 	$scope.colors = colorService.getColors();
 	this.tab = 0;
-	this.localModels = [{name: 'Cell 1', classification:'cell', type: 'Izhikevich'} ,{name: 'Cell Group 2', classification:'cellGroup'}, {name: 'Model 1', classification:'model'}, {name: 'Cell 3', classification:'cell', type: 'Izhikevich'}];
-	this.dbModels = [{name: 'Cell 4', classification:'cell', type: 'Hodgkin Huxley'} ,{name: 'Cell Group 5', classification:'cellGroup'}, {name: 'Model 3', classification:'model'}, {name: 'Cell 6', classification:'cell', type: 'NCS'}];
+
+	// temporary models
+	this.localModels = [{name: 'Cell 1', classification:'cell', type: 'Izhikevich'} ,
+	 	{name: 'Cell Group 2', classification:'cellGroup'},
+	  	{name: 'Model 1', classification:'model'},
+	  	{name: 'Cell 3', classification:'cell', type: 'Izhikevich'}];
+	this.dbModels = [{name: 'Cell 4', classification:'cell', type: 'Hodgkin Huxley'},
+	 	{name: 'Cell Group 5', classification:'cellGroup', 
+	 		groups:[{name: 'Cell 7', classification:'cell', type: 'NCS'}, 
+	 				{name: 'Cell 8', classification:'cell', type: 'Izhikevich'}, 
+	 				{name: 'Cell 9', classification:'cell', type: 'Hodgkin Huxley'},
+					{name: 'Cell 10', classification:'cell', type: 'Hodgkin Huxley'},
+
+					{name: 'Cell Group Inner', classification:'cellGroup',
+	 				groups:[{name: 'Cell 11', classification:'cell', type: 'NCS'}]},
+
+					{name: 'Cell Group Inner 2', classification:'cellGroup',
+	 				groups:[{name: 'Cell 12', classification:'cell', type: 'Izhikevich'}]},
+
+	 				]},
+	  	{name: 'Model 3', classification:'model'},
+	   	{name: 'Cell 6', classification:'cell',
+		type: 'NCS'}];
 
 	this.colorPickerPopover = {
   		"title": "Title",
@@ -90,25 +152,8 @@ ncbApp.controller("DrawerController", ['$scope', 'sidePanelService', 'colorServi
 	}
 
 	this.styleElement = function(model){
-		// style element based off type (cell, cell group, model)
-		if (model.classification === 'cell'){
-			return {
-                'background-image': 'linear-gradient(left, '+$scope.colors.cell+', '+$scope.colors.cell+' 5%, transparent 5%, transparent 100%)',
-                'background-image': '-webkit-linear-gradient(left, '+$scope.colors.cell+', '+$scope.colors.cell+' 5%, transparent 5%, transparent 100%)',
-            };
-		}
-		else if (model.classification === 'cellGroup'){
-			return {
-                'background-image': 'linear-gradient(left, '+$scope.colors.cellGroup+', '+$scope.colors.cellGroup+' 5%, transparent 5%, transparent 100%)',
-                'background-image': '-webkit-linear-gradient(left, '+$scope.colors.cellGroup+', '+$scope.colors.cellGroup+' 5%, transparent 5%, transparent 100%)',
-            };
-		}
-		else if (model.classification === 'model'){
-			return {
-                'background-image': 'linear-gradient(left, '+$scope.colors.model+', '+$scope.colors.model+' 5%, transparent 5%, transparent 100%)',
-                'background-image': '-webkit-linear-gradient(left, '+$scope.colors.model+', '+$scope.colors.model+' 5%, transparent 5%, transparent 100%)',
-            };
-		}
+		// get styled component from color service
+		return colorService.styleElement(model);
 	}
 
 	this.quickView = function(element){
@@ -126,9 +171,10 @@ ncbApp.controller("DrawerController", ['$scope', 'sidePanelService', 'colorServi
 }]);
 
 
-ncbApp.controller("SidePanelController", ['$scope', 'sidePanelService', 'colorService', function($scope, sidePanelService, colorService){
+// controller for the side panel preview
+ncbApp.controller("SidePanelController", ['$scope', "CurrentModelService", 'SidePanelService', 'ColorService', function($scope, currentModelService, sidePanelService, colorService){
 	$scope.data = sidePanelService.getData();
-	this.colors = colorService.getColors();
+	$scope.colors = colorService.getColors();
 
 	// get visibility from side panel service
 	this.isSidePanelVisible = function(){
@@ -140,29 +186,39 @@ ncbApp.controller("SidePanelController", ['$scope', 'sidePanelService', 'colorSe
 		sidePanelService.setVisible(false);
 	};
 
-	this.addToModel = function(){
-
+	this.addToModel = function(model){
+		currentModelService.addToModel(model);
 	};
 
-	this.styleElement = function(){
+	/*this.getNumGroups = function(){
+		alert(Object.keys($scope.data.groups).length);
+		return Object.keys($scope.data.groups).length;
+	}*/
+
+	this.styleHeader = function(){
 
 		// style element based off type (cell, cell group, model)
 		if ($scope.data.classification === 'cell'){
 			return {
-				'background-color': this.colors.cell
+				'background-color': $scope.colors.cell
             };
 		}
 		else if ($scope.data.classification === 'cellGroup'){
 			return {
-				'background-color': this.colors.cellGroup
+				'background-color': $scope.colors.cellGroup
             };
 		}
 		else if ($scope.data.classification === 'model'){
 			return {
-                'background-color': this.colors.model
+                'background-color': $scope.colors.model
             };
 		}
 	};
+
+	this.styleElement = function(model){
+		// get styled component from color service
+		return colorService.styleElement(model);
+	}
 
     $scope.$watch(function () { return sidePanelService.getData(); }, function (newValue) {
         if (newValue){
@@ -171,7 +227,8 @@ ncbApp.controller("SidePanelController", ['$scope', 'sidePanelService', 'colorSe
     });
 }]);
 
-ncbApp.controller("NavigationController", ['$scope', 'sidePanelService', function($scope, sidePanelService){
+// controller for the nav bar
+ncbApp.controller("NavigationController", ['$scope', 'SidePanelService', function($scope, sidePanelService){
 	// get visibility from side panel service
 	this.isSidePanelVisible = function(){
 		return sidePanelService.visible;
