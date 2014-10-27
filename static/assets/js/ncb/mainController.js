@@ -1,4 +1,4 @@
-var ncbApp = angular.module('ncbApp', ['snap', 'colorpicker.module', 'mgcrea.ngStrap', 'mgcrea.ngStrap.tooltip']);
+var ncbApp = angular.module('ncbApp', ['snap', 'colorpicker.module', 'mgcrea.ngStrap', 'mgcrea.ngStrap.tooltip', 'angularModalService']);
 
 // disable right drawer
 ncbApp.config(function(snapRemoteProvider) {
@@ -15,24 +15,33 @@ ncbApp.config(function(snapRemoteProvider) {
 
 // create side panel service 
 ncbApp.factory('SidePanelService', function($rootScope) {
-  var sidePanelService = {};
+	var sidePanelService = {};
 
-  sidePanelService.visible = false;
-  sidePanelService.data = {name: 'Name', classification:'cell'};
+	sidePanelService.breadCrumbs = ["Home"];
+	sidePanelService.visible = false;
+	sidePanelService.data = {};
 
-  sidePanelService.setVisible = function(isVisible) {
-    this.visible = isVisible;
-  };
+	sidePanelService.setVisible = function(isVisible) {
+		this.visible = isVisible;
+	};
 
-  sidePanelService.setData = function(newData){
-  	this.data = newData;
-  };
+	sidePanelService.setData = function(newData){
+		this.data = newData;
 
-  sidePanelService.getData = function(){
-  	return this.data;
-  };
+		// rest breadcrumbs to home
+		this.breadCrumbs = ["Home"];
+	};
 
-  return sidePanelService;
+	// get 
+	this.getBreadCrumbs = function(){
+		return this.breadCrumbs;
+	}
+
+	sidePanelService.getData = function(){
+		return this.data;
+	};
+
+	return sidePanelService;
 });
 
 // service that provides set website colors
@@ -190,11 +199,6 @@ ncbApp.controller("SidePanelController", ['$scope', "CurrentModelService", 'Side
 		currentModelService.addToModel(model);
 	};
 
-	/*this.getNumGroups = function(){
-		alert(Object.keys($scope.data.groups).length);
-		return Object.keys($scope.data.groups).length;
-	}*/
-
 	this.styleHeader = function(){
 
 		// style element based off type (cell, cell group, model)
@@ -218,10 +222,25 @@ ncbApp.controller("SidePanelController", ['$scope', "CurrentModelService", 'Side
 	this.styleElement = function(model){
 		// get styled component from color service
 		return colorService.styleElement(model);
+	};
+
+	this.selectComponent = function(component){
+		sidePanelService.setData(component);
+	};
+
+	// go to model home
+	this.goHome = function(){
+
+	};
+
+	// get 
+	this.getBreadCrumbs = function(){
+		return sidePanelService.breadCrumbs;
 	}
 
     $scope.$watch(function () { return sidePanelService.getData(); }, function (newValue) {
         if (newValue){
+        	// update the data
         	$scope.data = newValue;
         } 
     });
