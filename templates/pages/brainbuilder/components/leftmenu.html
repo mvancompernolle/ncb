@@ -18,20 +18,20 @@
 	<!-- filtering is done here -->
 	<div class="panel-body" >
 		<div ng-repeat="model in currentModel.neurons">
-                <div ng-style="modelCtrl.styleElement(model)" class="list-group-item ncb-cell-list-item">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <a class="ncb-cell-name-txt ncb-list-text-color" href="">{{ '{{model.name}}' }} <button type="button" ng-click="modelCtrl.removeModel(model)" class="btn btn-xs btn-danger pull-right">x</button></a>
-                        </div>
-                    </div>
-                    <div class="row ncb-default-blank-row">
-                        <div class="col-lg-12 ">
-                            <a ng-show="model.classification == 'cell'" class="ncb-cell-type-txt" href="">{{ '{{model.type}}' }}</a>
-                            <a ng-show="model.classification == 'cellGroup'" class="ncb-cell-type-txt" href="">Cell Group</a>
-                            <a ng-show="model.classification == 'model'" class="ncb-cell-type-txt" href="">Model</a>
-                        </div>
-                    </div>
-                </div>
+          <div ng-style="modelCtrl.styleElement(model)" class="list-group-item ncb-cell-list-item">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <a class="ncb-cell-name-txt ncb-list-text-color" href="">{{ '{{model.name}}' }} <button type="button" ng-click="modelCtrl.removeModel(model)" class="btn btn-xs btn-danger pull-right">x</button></a>
+                  </div>
+              </div>
+              <div class="row ncb-default-blank-row">
+                  <div class="col-lg-12 ">
+                      <a ng-show="model.classification == 'cell'" class="ncb-cell-type-txt" href="">{{ '{{model.type}}' }}</a>
+                      <a ng-show="model.classification == 'cellGroup'" class="ncb-cell-type-txt" href="">Cell Group</a>
+                      <a ng-show="model.classification == 'model'" class="ncb-cell-type-txt" href="">Model</a>
+                  </div>
+              </div>
+          </div>
 						
 		</div>
 	</div>

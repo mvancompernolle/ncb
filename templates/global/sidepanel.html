@@ -11,7 +11,7 @@
 	<div>
 		<ol class="breadcrumb ncb-bread">
   			<li ng-repeat="breadCrumb in sideCtrl.getBreadCrumbs()">
-                <a href="#">{{ '{{breadCrumb}}' }}</a>
+                <a href="#" ng-click="sideCtrl.goToBreadCrumb($index)">{{ '{{breadCrumb.name}}' }}</a>
             </li>
 		</ol>
 	</div>
@@ -23,11 +23,11 @@
 			</div>
 
         	<!-- show subcomponenets of model if not a cell -->
-        	<div class="col-lg-12" id="subComponents" ng-show="data.classification != 'cell'">
-	        	<div>
-	        	    <span class="label label-default" style="display:block;">Components</span>
-	        	</div>
-				<a class="list-group-item ncb-cell-list-item" ng-style="sideCtrl.styleElement(group)" ng-show="data.classification != 'cell'" ng-repeat="group in data.groups" ng-dblclick="sideCtrl.selectComponent(group)">
+            <div class="col-lg-12" ng-show="data.classification != 'cell' && data.cellGroups.length > 0">
+                <span class="label label-default" style="display:block;">Components</span>
+            </div>
+        	<div class="col-lg-12" id="subComponents" ng-show="data.classification != 'cell' && data.cellGroups.length > 0">
+				<a class="list-group-item ncb-cell-list-item" ng-style="sideCtrl.styleElement(group)" ng-show="data.classification != 'cell'" ng-repeat="group in data.cellGroups" ng-dblclick="sideCtrl.selectComponent(group, $index)">
                     <p class="ncb-cell-name-txt ncb-list-text-color" href="">{{ '{{group.name}}' }}</p>
                     <h4 ng-show="group.classification == 'cell'"class="ncb-cell-type-txt" href="">{{ '{{group.type}}' }}</h4>
                     <h4 ng-show="group.classification == 'cellGroup'"class="ncb-cell-type-txt" href="">Cell Group</h4>
@@ -41,40 +41,40 @@
                     <div id="izParam" ng-show="data.type == 'Izhikevich'">
                         <a class="list-group-item"> Type: {{ '{{data.type}}' }}</a>
                         <a class="list-group-item"> <span style="text-decoration: underline;">Parameter Name</span></a>
-                        <a class="list-group-item"> A: </a>
-                        <a class="list-group-item"> B: </a>
-                        <a class="list-group-item"> C: </a>
-                        <a class="list-group-item"> D: </a>
-                        <a class="list-group-item"> U: </a>
-                        <a class="list-group-item"> V: </a>
-                        <a class="list-group-item"> Threshold: </a>
+                        <a class="list-group-item"> A: {{ '{{data.parameters.a.value}}' }}</a>
+                        <a class="list-group-item"> B: {{ '{{data.parameters.b.value}}' }}</a>
+                        <a class="list-group-item"> C: {{ '{{data.parameters.c.value}}' }}</a>
+                        <a class="list-group-item"> D: {{ '{{data.parameters.d.value}}' }}</a>
+                        <a class="list-group-item"> U: {{ '{{data.parameters.u.value}}' }}</a>
+                        <a class="list-group-item"> V: {{ '{{data.parameters.v.value}}' }}</a>
+                        <a class="list-group-item"> Threshold: {{ '{{data.parameters.threshold.value}}' }}</a>
                     </div>
                     <div id="ncsParam" ng-show="data.type == 'NCS'">
                         <a class="list-group-item"> Type: {{ '{{data.type}}' }}</a>
                         <a class="list-group-item"> <span style="text-decoration: underline;">Parameter Name</span></a>
-                        <a class="list-group-item"> Threshold: </a>
-                        <a class="list-group-item"> Resting Potential: </a>
-                        <a class="list-group-item"> Calcium: </a>
-                        <a class="list-group-item"> Calc. Spike Incr.: </a>
-                        <a class="list-group-item"> Tau Calcium: </a>
-                        <a class="list-group-item"> Leak Reversal Pot.: </a>
-                        <a class="list-group-item"> Tau Membrane: </a>
-                        <a class="list-group-item"> R Membrane: </a>
-                        <a class="list-group-item"> Spike Shape: </a>
+                        <a class="list-group-item"> Threshold: {{ '{{data.parameters.threshold.value}}' }}</a>
+                        <a class="list-group-item"> Resting Potential: {{ '{{data.parameters.restingPotential.value}}' }}</a>
+                        <a class="list-group-item"> Calcium: {{ '{{data.parameters.calcium.value}}' }}</a>
+                        <a class="list-group-item"> Calc. Spike Incr.: {{ '{{data.parameters.calciumSpikeIncrement.value}}' }}</a>
+                        <a class="list-group-item"> Tau Calcium: {{ '{{data.parameters.tauCalcium.value}}' }}</a>
+                        <a class="list-group-item"> Leak Reversal Pot.: {{ '{{data.parameters.leakReversalPotential.value}}' }}</a>
+                        <a class="list-group-item"> Tau Membrane: {{ '{{data.parameters.tauMembrane.value}}' }}</a>
+                        <a class="list-group-item"> R Membrane: {{ '{{data.parameters.rMembrane.value}}' }}</a>
+                        <a class="list-group-item"> Spike Shape: {{ '{{data.parameters.spikeShape.value}}' }}</a>
                     </div>
-                    <div id="hhParam" ng-show="data.type == 'Hodgkin Huxley'">
+                    <div id="hhParam" ng-show="data.type == 'HodgkinHuxley'">
                         <a class="list-group-item"> Type: {{ '{{data.type}}' }}</a>
                         <a class="list-group-item"> <span style="text-decoration: underline;">Parameter Name</span></a>
-                        <a class="list-group-item"> Threshold: </a>
-                        <a class="list-group-item"> Resting Potential: </a>
-                        <a class="list-group-item"> Capacitance: </a>
+                        <a class="list-group-item"> Threshold: {{ '{{data.parameters.threshold.value}}' }}</a>
+                        <a class="list-group-item"> Resting Potential: {{ '{{data.parameters.restingPotential.value}}' }}</a>
+                        <a class="list-group-item"> Capacitance: {{ '{{data.parameters.capacitance.value}}' }}</a>
                     </div>
 				</div>
 				<div ng-show="data.classification == 'cellGroup'">
                     <div id="cellParams">
 	                    <a class="list-group-item"> Type: Cell Group</a>
-                        <a class="list-group-item"> Quantity: </a>
-                        <a class="list-group-item"> Geometry: </a>
+                        <a class="list-group-item"> Quantity: {{ '{{data.num}}' }}</a>
+                        <a class="list-group-item"> Geometry: {{ '{{data.geometry}}' }}</a>
                     </div>
 				</div>
 				<div ng-show="data.classification == 'model'">

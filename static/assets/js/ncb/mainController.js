@@ -1,5 +1,49 @@
 var ncbApp = angular.module('ncbApp', ['snap', 'colorpicker.module', 'mgcrea.ngStrap', 'mgcrea.ngStrap.tooltip', 'angularModalService']);
 
+// TEMPORARY TEST VARIABLES //////////////////////////////////////////////////////////
+//test models
+var testChannel1 = new voltageGatedIonChannel();
+var testChannel2 = new calciumDependantChannel();
+var testParam = new izhikevichParam();
+var test2Param = new ncsParam();
+var test3Param = new hodgkinHuxleyParam();
+var a1 = new particleVariableConstants();
+var b1 = new particleVariableConstants();
+var testParticle = new voltageGatedParticle(a1, b1);
+var testChannel3 = new voltageGatedChannel(testParticle);
+var test4Param = new hodgkinHuxleyParam();
+var flatS = new flatSynapse();
+var ncsS = new ncsSynapse();
+
+// hard code modals for testing purposes
+var newNcs = new ncsParam();
+var newhh = new hodgkinHuxleyParam();
+var newIzhi = new izhikevichParam();
+var param = new cell("Param", "HodgkinHuxley", newhh);
+var param2 = new cell("Param2", "NCS", newNcs);
+myModels = [
+	new cell("Cell 1", "NCS", newNcs),
+	new cell("Cell 2", "HodgkinHuxley", newhh),
+    new cellGroup('Cell Group 1', 1, cloneParam(param), 'box'),
+    new cellGroup('Cell Group 2', 2, cloneParam(param2), 'box'),
+];
+myDBModels  = [
+	new cell("Cell 3", "Izhikevich", newIzhi),
+    new cellGroup('Cell Group 3', 3, cloneParam(param), 'box'),
+    new cellGroup('Cell Group 4', 4, cloneParam(param2), 'box'),
+];
+
+myModels[2].cellGroups.push(new cell("Cell 4", "NCS", newNcs));
+myModels[2].cellGroups.push(new cell("Cell 5", "Izhikevich", newIzhi));
+myModels[2].cellGroups.push(new cellGroup('Cell Group 5', 5, cloneParam(param), 'box'));
+myModels[2].cellGroups.push(new cell("Cell 6", "NCS", newNcs));
+myModels[2].cellGroups.push(new cell("Cell 7", "Izhikevich", newIzhi));
+myModels[2].cellGroups.push(new cellGroup('Cell Group 7', 5, cloneParam(param), 'box'));
+myModels[2].cellGroups[2].cellGroups.push(new cell("Cell 8", "Izhikevich", newIzhi));
+myModels[2].cellGroups[2].cellGroups.push(new cellGroup('Cell Group 8', 6, cloneParam(param2), 'box'));
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
 // disable right drawer
 ncbApp.config(function(snapRemoteProvider) {
     snapRemoteProvider.globalOptions.disable = 'right';
@@ -17,28 +61,61 @@ ncbApp.config(function(snapRemoteProvider) {
 ncbApp.factory('SidePanelService', function($rootScope) {
 	var sidePanelService = {};
 
-	sidePanelService.breadCrumbs = ["Home"];
+	sidePanelService.breadCrumbs = [{name: "Home", index: 0}];
 	sidePanelService.visible = false;
 	sidePanelService.data = {};
+	sidePanelService.component = {};
 
 	sidePanelService.setVisible = function(isVisible) {
 		this.visible = isVisible;
 	};
 
 	sidePanelService.setData = function(newData){
+		// set the base data to new data
 		this.data = newData;
+		// set the current component to new data
+		this.component = newData;
 
 		// rest breadcrumbs to home
-		this.breadCrumbs = ["Home"];
+		this.breadCrumbs = [{name: "Home", index: 0}];
 	};
 
-	// get 
-	this.getBreadCrumbs = function(){
+	sidePanelService.setComponent = function(component, index){
+		// set current component and create breadcrumb for it
+		this.component = component;
+		this.breadCrumbs.push({name: component.name, index: index});
+	};
+
+	sidePanelService.goHome = function(){
+		this.breadCrumbs = [{name: "Home", index: 0}];
+		this.component = this.data;
+	};
+
+	sidePanelService.goToBreadCrumb = function(index){
+		// go home if bread crumb index is 0
+		if(index == 0)
+			this.goHome();
+		else if(index < this.breadCrumbs.length){
+			// if not home loop through breadcumbs to reach selected index
+			this.component = this.data;
+			var setIndex;
+			for(var i=1; i<=index; i++){
+				setIndex = this.breadCrumbs[i].index;
+				this.component = this.component.cellGroups[setIndex];
+			}
+
+			// shorten breadcrumbs to selected index
+			this.breadCrumbs.splice(index+1);
+		}
+	};
+
+	// get bread crumbs
+	sidePanelService.getBreadCrumbs = function(){
 		return this.breadCrumbs;
 	}
 
 	sidePanelService.getData = function(){
-		return this.data;
+		return this.component;
 	};
 
 	return sidePanelService;
@@ -89,18 +166,19 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 	var currentModelService = {};
 
 	// store current model in service so it can be accessed anywhere
-	currentModelService.currentModel = new currentWorkingModel();
+	currentModelService.currentModel = new model();
 
 	currentModelService.setName = function(name){
 		this.currentModel.name = name;
 	};
 
 	currentModelService.addToModel = function(model){
-		// add model componenet if not already in the current model
+		// add componenet if not already in the current model
 		var index = getIndex(this.currentModel.neurons, "name", model.name);
 		if(this.currentModel.neurons.length === 0 || index === -1){
 			this.currentModel.neurons.push(model);
-		}
+		}	
+
 	};
 
 	currentModelService.removeModel = function(model){
@@ -119,33 +197,15 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 });
 
 // controller for the model import/export drawer
-ncbApp.controller("DrawerController", ['$scope', 'SidePanelService', 'ColorService', function($scope, sidePanelService, colorService){
+ncbApp.controller("DrawerController", ['$scope', 'SidePanelService', 'ColorService', 'CurrentModelService', 
+	function($scope, sidePanelService, colorService, currentModelService){
+
 	$scope.viewed = sidePanelService.getData();
 	$scope.colors = colorService.getColors();
 	this.tab = 0;
 
-	// temporary models
-	this.localModels = [{name: 'Cell 1', classification:'cell', type: 'Izhikevich'} ,
-	 	{name: 'Cell Group 2', classification:'cellGroup'},
-	  	{name: 'Model 1', classification:'model'},
-	  	{name: 'Cell 3', classification:'cell', type: 'Izhikevich'}];
-	this.dbModels = [{name: 'Cell 4', classification:'cell', type: 'Hodgkin Huxley'},
-	 	{name: 'Cell Group 5', classification:'cellGroup', 
-	 		groups:[{name: 'Cell 7', classification:'cell', type: 'NCS'}, 
-	 				{name: 'Cell 8', classification:'cell', type: 'Izhikevich'}, 
-	 				{name: 'Cell 9', classification:'cell', type: 'Hodgkin Huxley'},
-					{name: 'Cell 10', classification:'cell', type: 'Hodgkin Huxley'},
-
-					{name: 'Cell Group Inner', classification:'cellGroup',
-	 				groups:[{name: 'Cell 11', classification:'cell', type: 'NCS'}]},
-
-					{name: 'Cell Group Inner 2', classification:'cellGroup',
-	 				groups:[{name: 'Cell 12', classification:'cell', type: 'Izhikevich'}]},
-
-	 				]},
-	  	{name: 'Model 3', classification:'model'},
-	   	{name: 'Cell 6', classification:'cell',
-		type: 'NCS'}];
+	this.localModels = myModels;
+	this.dbModels = myDBModels;
 
 	this.colorPickerPopover = {
   		"title": "Title",
@@ -164,6 +224,10 @@ ncbApp.controller("DrawerController", ['$scope', 'SidePanelService', 'ColorServi
 		// get styled component from color service
 		return colorService.styleElement(model);
 	}
+
+	this.addToModel = function(model){
+		currentModelService.addToModel(model);
+	};
 
 	this.quickView = function(element){
 		// activate the side panel
@@ -224,19 +288,19 @@ ncbApp.controller("SidePanelController", ['$scope', "CurrentModelService", 'Side
 		return colorService.styleElement(model);
 	};
 
-	this.selectComponent = function(component){
-		sidePanelService.setData(component);
+	this.selectComponent = function(component, index){
+		sidePanelService.setComponent(component, index);
 	};
 
 	// go to model home
-	this.goHome = function(){
-
+	this.goToBreadCrumb = function(index){
+		sidePanelService.goToBreadCrumb(index);
 	};
 
-	// get 
+	// get bread crumbs
 	this.getBreadCrumbs = function(){
 		return sidePanelService.breadCrumbs;
-	}
+	};
 
     $scope.$watch(function () { return sidePanelService.getData(); }, function (newValue) {
         if (newValue){

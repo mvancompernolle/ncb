@@ -111,13 +111,13 @@
 
 #subComponents{
   margin-bottom: 16px;
-  height: 35%;
+  max-height: 35%;
   overflow: auto;
 }
 
 #paramsPreview {
   margin-bottom: 16px;
-  min-height: 45%;
+  max-height: 80%;
   overflow: auto;
 }
 

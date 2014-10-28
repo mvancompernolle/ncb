@@ -1,5 +1,6 @@
-function currentWorkingModel() {
+function model() {
 	this.name = "Current Model";
+	this.classification = "model";
 	this.description = "";
 	this.author = "";
 	this.neurons = [];
@@ -124,22 +125,20 @@ function reportParameters() {
 
 }
 
-function modelParameters(name, type, parameters, dbType) {
-	this.className = "neuron";
+function cell(name, type, parameters) {
 	this.name = name;
 	this.type = type;
+	this.classification = "cell";
 	this.parameters = parameters;
-	this.dbType = dbType;
 }
 
 function cellGroup(name, num, modelParameters, geometry) {
-	this.className = "cellGroup";
+	this.classification = "cellGroup";
 	this.name = name;
 	this.num = num;
 	this.modelParameters = modelParameters;
 	this.geometry = geometry;
 	this.cellGroups = [];
-	//this.subGroup = subGroup;
 }
 
 function cellAlias(name, cellGroup, cellAlias) {
