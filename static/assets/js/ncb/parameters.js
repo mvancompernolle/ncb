@@ -3,7 +3,6 @@ function model() {
 	this.classification = "model";
 	this.description = "";
 	this.author = "";
-	this.neurons = [];
 	this.cellGroups = [];
 	this.cellAliases = [];
 	this.synapses = [];

@@ -38,6 +38,26 @@ ncbApp.controller("ModelBuilderController", ['$scope', 'CurrentModelService', 'S
 
 	};
 
+	this.selectComponent = function(component, index){
+		currentModelService.setComponent(component, index);
+	};
+
+	// get bread crumbs
+	this.getBreadCrumbs = function(){
+		return currentModelService.getBreadCrumbs();
+	};
+
+	// go to model home
+	this.goToBreadCrumb = function(index){
+		currentModelService.goToBreadCrumb(index);
+	};
+
+    $scope.$watch(function () { return currentModelService.getData(); }, function (newValue) {
+        if (newValue){
+        	// update the data
+        	$scope.data = newValue;
+        } 
+    });
 
 }]);
 

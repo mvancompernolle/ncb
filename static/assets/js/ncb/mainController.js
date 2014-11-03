@@ -168,27 +168,27 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 	// store current model in service so it can be accessed anywhere
 	currentModelService.currentModel = new model();
 
-	currentModelServicebreadCrumbs = [{name: "Home", index: 0}];
-	currentModelServicecomponent = {};
+	currentModelService.breadCrumbs = [{name: "Home", index: 0}];
+	currentModelService.component = currentModelService.currentModel;
 
 	currentModelService.setName = function(name){
 		this.currentModel.name = name;
 	};
 
 	currentModelService.addToModel = function(model){
-		// add componenet if not already in the current model
-		var index = getIndex(this.currentModel.neurons, "name", model.name);
-		if(this.currentModel.neurons.length === 0 || index === -1){
-			this.currentModel.neurons.push(model);
-		}	
 
+		// add componenet if not already in the current model
+		var index = getIndex(this.component.cellGroups, "name", model.name);
+		if(this.component.cellGroups.length === 0 || index === -1){
+			this.component.cellGroups.push(model);
+		}	
 	};
 
 	currentModelService.removeModel = function(model){
 		// remove model if found
-		var myIndex = getIndex(this.currentModel.neurons, "name", model.name)
+		var myIndex = getIndex(this.component.cellGroups, "name", model.name)
 		if(myIndex != -1){
-			this.currentModel.neurons.splice(myIndex, 1);
+			this.component.cellGroups.splice(myIndex, 1);
 		}
 	};
 
@@ -205,7 +205,7 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 
 	currentModelService.goHome = function(){
 		this.breadCrumbs = [{name: "Home", index: 0}];
-		this.component = this.data;
+		this.component = this.currentModel;
 	};
 
 	currentModelService.goToBreadCrumb = function(index){
@@ -214,7 +214,7 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 			this.goHome();
 		else if(index < this.breadCrumbs.length){
 			// if not home loop through breadcumbs to reach selected index
-			this.component = this.data;
+			this.component = this.currentModel;
 			var setIndex;
 			for(var i=1; i<=index; i++){
 				setIndex = this.breadCrumbs[i].index;
@@ -230,6 +230,10 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 	currentModelService.getBreadCrumbs = function(){
 		return this.breadCrumbs;
 	}
+
+	currentModelService.getData = function(){
+		return this.component;
+	};
 	// end bread crumb functions ////////////////////////////////////////////
 
 	return currentModelService;
