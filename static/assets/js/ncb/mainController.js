@@ -168,6 +168,9 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 	// store current model in service so it can be accessed anywhere
 	currentModelService.currentModel = new model();
 
+	currentModelServicebreadCrumbs = [{name: "Home", index: 0}];
+	currentModelServicecomponent = {};
+
 	currentModelService.setName = function(name){
 		this.currentModel.name = name;
 	};
@@ -192,6 +195,42 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 	currentModelService.getCurrentModel = function(){
 		return this.currentModel;
 	};
+
+	// bread crumb functions //////////////////////////////////////////////
+	currentModelService.setComponent = function(component, index){
+		// set current component and create breadcrumb for it
+		this.component = component;
+		this.breadCrumbs.push({name: component.name, index: index});
+	};
+
+	currentModelService.goHome = function(){
+		this.breadCrumbs = [{name: "Home", index: 0}];
+		this.component = this.data;
+	};
+
+	currentModelService.goToBreadCrumb = function(index){
+		// go home if bread crumb index is 0
+		if(index == 0)
+			this.goHome();
+		else if(index < this.breadCrumbs.length){
+			// if not home loop through breadcumbs to reach selected index
+			this.component = this.data;
+			var setIndex;
+			for(var i=1; i<=index; i++){
+				setIndex = this.breadCrumbs[i].index;
+				this.component = this.component.cellGroups[setIndex];
+			}
+
+			// shorten breadcrumbs to selected index
+			this.breadCrumbs.splice(index+1);
+		}
+	};
+
+	// get bread crumbs
+	currentModelService.getBreadCrumbs = function(){
+		return this.breadCrumbs;
+	}
+	// end bread crumb functions ////////////////////////////////////////////
 
 	return currentModelService;
 });
