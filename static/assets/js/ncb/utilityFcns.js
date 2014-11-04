@@ -10,6 +10,14 @@ function getIndex(source, attr, value) {
     return -1;
 };
 
+function getCellIndex(component, value){
+	for(var i=0; i<component.length; i++){
+		if(component[i].name === value)
+            return i;
+	}
+    return -1;
+}
+
 function cloneParam(source) {
     if(source.className === "izhikevichParam") {
         var ret = new izhikevichParam();

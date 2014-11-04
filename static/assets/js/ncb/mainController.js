@@ -1,5 +1,8 @@
 var ncbApp = angular.module('ncbApp', ['snap', 'colorpicker.module', 'mgcrea.ngStrap', 'mgcrea.ngStrap.tooltip', 'angularModalService']);
 
+//////// A COMPONENT IS A GENERAL TERM FOR A MODEL, CELL, OR CELL GROUP /////////////////////////////////
+//////// YOU DETERMINE THE COMPONENT TIME THROUGH ITS CLASSIFICATION MEMBER /////////////////////////////
+
 // TEMPORARY TEST VARIABLES //////////////////////////////////////////////////////////
 //test models
 var testChannel1 = new voltageGatedIonChannel();
@@ -81,6 +84,7 @@ ncbApp.factory('SidePanelService', function($rootScope) {
 	};
 
 	sidePanelService.setComponent = function(component, index){
+
 		// set current component and create breadcrumb for it
 		this.component = component;
 		this.breadCrumbs.push({name: component.name, index: index});
@@ -136,6 +140,7 @@ ncbApp.factory('ColorService', function($rootScope){
 	};
 
 	colorService.styleElement = function(model){
+		//alert(model.name);
 		// style element based off type (cell, cell group, model)
 		if (model.classification === 'cell'){
 			return {
@@ -169,25 +174,24 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 	currentModelService.currentModel = new model();
 
 	currentModelService.breadCrumbs = [{name: "Home", index: 0}];
-	currentModelService.component = [];
+	currentModelService.component = currentModelService.currentModel.cellGroups;
 
 	currentModelService.setName = function(name){
 		this.currentModel.name = name;
 	};
 
 	currentModelService.addToModel = function(model){
-
 		// add component if not already in the current model
-		//var index = getIndex(this.component, "name", model.name);
-		//alert(index);
-		//if(this.component.length === 0 || index === -1){
+		var index = getCellIndex(this.component, model.name);
+
+		if(this.component.length === 0 || index === -1){
 			this.component.push(model);
-		//}
+		}
 	};
 
 	currentModelService.removeModel = function(model){
 		// remove model if found
-		var myIndex = getIndex(this.component.cellGroups, "name", model.name)
+		var myIndex = getCellIndex(this.component, model.name)
 		if(myIndex != -1){
 			this.component.splice(myIndex, 1);
 		}
@@ -199,27 +203,41 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 
 	// bread crumb functions //////////////////////////////////////////////
 	currentModelService.setComponent = function(component, index){
-		// set current component and create breadcrumb for it
-		this.component = component;
-		this.breadCrumbs.push({name: component.name, index: index});
+
+		// set component to sub component if a cell group is selected
+		if(component.classification == "cellGroup"){
+			// set current component and create breadcrumb for it
+			this.component = component.cellGroups;
+			this.breadCrumbs.push({name: component.name, index: index});
+		}
 	};
 
 	currentModelService.goHome = function(){
 		this.breadCrumbs = [{name: "Home", index: 0}];
-		this.component = this.currentModel;
+		this.component = this.currentModel.cellGroups;
 	};
 
 	currentModelService.goToBreadCrumb = function(index){
+
 		// go home if bread crumb index is 0
 		if(index == 0)
 			this.goHome();
+
+		// if not home loop through breadcumbs to reach selected index
 		else if(index < this.breadCrumbs.length){
-			// if not home loop through breadcumbs to reach selected index
-			this.component = this.currentModel;
+
+			// go down the first layer (starts at 1 : home has a useless index)
+			this.component = this.currentModel.cellGroups[this.breadCrumbs[1].index].cellGroups;
+
+			//alert(this.component.name);
+
+			// go down each following layer index you hit the bread crumb index
 			var setIndex;
-			for(var i=1; i<=index; i++){
+			for(var i=2; i<index; i++){
 				setIndex = this.breadCrumbs[i].index;
-				this.component = this.component.cellGroups[setIndex];
+				alert(setIndex);
+				this.component = this.component.cellGroups[setIndex].cellGroups;
+				//alert(this.component.name);
 			}
 
 			// shorten breadcrumbs to selected index
@@ -308,7 +326,7 @@ ncbApp.controller("SidePanelController", ['$scope', "CurrentModelService", 'Side
 	};
 
 	this.styleHeader = function(){
-
+		//alert($scope.data.name);
 		// style element based off type (cell, cell group, model)
 		if ($scope.data.classification === 'cell'){
 			return {

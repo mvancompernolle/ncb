@@ -37,14 +37,14 @@ ncbApp.controller("ModelBuilderController", ['$scope', 'CurrentModelService', 'S
 
 	this.getComponents = function(){
 		return currentModelService.getData();
-	}
+	};
 
-    $scope.$watch(function () { return currentModelService.getData(); }, function (newValue) {
+    /*$scope.$watch(function () { return currentModelService.getData(); }, function (newValue) {
         if (newValue){
         	// update the data
         	$scope.data = newValue;
         } 
-    });
+    });*/
 
 }]);
 
