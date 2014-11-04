@@ -6,8 +6,8 @@
         <div id="currentModelName">
             Current Model
         </div>
-        <button type="button"  bs-modal="modal" data-animation="am-fade-and-scale" data-placement="center" class="btn btn-xs btn-info pull-right">+ Cell</button>
-        <button type="button" id="addCellGroup" ng-click="show()" class="btn btn-xs btn-info pull-right">+ Cell Group</button>
+        <button type="button" data-toggle="modal" data-target="#addCellModal" class="btn btn-xs btn-info pull-right">+ Cell</button>
+        <button type="button" id="addCellGroup" data-toggle="modal" data-target="#addCellGroupModal" class="btn btn-xs btn-info pull-right">+ Cell Group</button>
 	</div>
 	<div>
     <ol class="breadcrumb ncb-bread">
@@ -19,7 +19,7 @@
 	
 	<!-- filtering is done here -->
 	<div class="panel-body" >
-		<div ng-repeat="model in currentModel.cellGroups">
+		<div ng-repeat="model in modelCtrl.getComponents()">
           <div ng-style="modelCtrl.styleElement(model)" class="list-group-item ncb-cell-list-item" ng-dblclick="modelCtrl.selectComponent(model, $index)">
               <div class="row">
                   <div class="col-lg-12">

@@ -1,4 +1,5 @@
 function getIndex(source, attr, value) {
+    alert(source);
 	// return index if found
     for(var i=0; i<source.length; i++) {
         if(source[i][attr] === value) {

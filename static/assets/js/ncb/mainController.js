@@ -63,7 +63,7 @@ ncbApp.factory('SidePanelService', function($rootScope) {
 
 	sidePanelService.breadCrumbs = [{name: "Home", index: 0}];
 	sidePanelService.visible = false;
-	sidePanelService.data = {};
+	sidePanelService.data;
 	sidePanelService.component = {};
 
 	sidePanelService.setVisible = function(isVisible) {
@@ -169,7 +169,7 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 	currentModelService.currentModel = new model();
 
 	currentModelService.breadCrumbs = [{name: "Home", index: 0}];
-	currentModelService.component = currentModelService.currentModel;
+	currentModelService.component = [];
 
 	currentModelService.setName = function(name){
 		this.currentModel.name = name;
@@ -177,18 +177,19 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 
 	currentModelService.addToModel = function(model){
 
-		// add componenet if not already in the current model
-		var index = getIndex(this.component.cellGroups, "name", model.name);
-		if(this.component.cellGroups.length === 0 || index === -1){
-			this.component.cellGroups.push(model);
-		}	
+		// add component if not already in the current model
+		//var index = getIndex(this.component, "name", model.name);
+		//alert(index);
+		//if(this.component.length === 0 || index === -1){
+			this.component.push(model);
+		//}
 	};
 
 	currentModelService.removeModel = function(model){
 		// remove model if found
 		var myIndex = getIndex(this.component.cellGroups, "name", model.name)
 		if(myIndex != -1){
-			this.component.cellGroups.splice(myIndex, 1);
+			this.component.splice(myIndex, 1);
 		}
 	};
 
@@ -364,4 +365,53 @@ ncbApp.controller("NavigationController", ['$scope', 'SidePanelService', functio
 	this.hideSidePanel = function(){
 		sidePanelService.setVisible(false);
 	};
+}]);
+
+// controller for add cell modal
+ncbApp.controller("AddCellModalController", ['CurrentModelService', function(currentModelService){
+
+	this.cellName;
+	this.cellType = "Izhikevich";
+	this.channelType = "Voltage Gated Ion Channel";
+
+	this.addCell = function(){
+		var params;
+
+		// create params based on type
+		if(this.cellType == "Izhikevich")
+			params = new izhikevichParam();
+		else if(this.cellType == "NCS")
+			params = new ncsParam();
+		else
+			params = new hodgkinHuxleyParam();
+
+		// add the cell to the current model
+		currentModelService.addToModel(new cell(this.cellName, this.cellType, params));
+	};
+
+}]);
+
+// controller for add cell modal
+ncbApp.controller("AddCellGroupModalController", ['CurrentModelService', function(currentModelService){
+
+	this.cellGroupName;
+	this.amount;
+	this.cellType = "Izhikevich";
+	this.channelType = "Voltage Gated Ion Channel";
+
+	this.addCellGroup = function(){
+		var params;
+
+		// create params based on type
+		if(this.cellType == "Izhikevich")
+			params = new izhikevichParam();
+		else if(this.cellType == "NCS")
+			params = new ncsParam();
+		else
+			params = new hodgkinHuxleyParam();
+
+		// add the cell to the current model
+		currentModelService.addToModel(new cellGroup(this.cellGroupName, this.amount, this.cellType, params));
+	};
+
 }]);
