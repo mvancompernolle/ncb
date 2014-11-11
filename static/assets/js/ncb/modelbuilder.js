@@ -1,4 +1,5 @@
 
+// left panel controller (model navigation)
 ncbApp.controller("ModelBuilderController", ['$scope', 'CurrentModelService', 'SidePanelService', 'ColorService', 
 	function($scope, currentModelService, sidePanelService, colorService){
 	$scope.colors = colorService.getColors();
@@ -39,12 +40,34 @@ ncbApp.controller("ModelBuilderController", ['$scope', 'CurrentModelService', 'S
 		return currentModelService.getData();
 	};
 
+	// set the cell group or cell to display in the parameters section
+	this.displayParameters = function(component){
+		currentModelService.setDisplayedComponent(component);
+	};
+
     /*$scope.$watch(function () { return currentModelService.getData(); }, function (newValue) {
         if (newValue){
         	// update the data
         	$scope.data = newValue;
         } 
     });*/
+
+}]);
+
+// controller for the right panel that displays cell or cell group parameters
+ncbApp.controller("ModelParametersController", ['$scope', 'CurrentModelService', function($scope, currentModelService){
+
+	$scope.displayed = currentModelService.getDisplayedComponent();
+
+	// update component show if changed
+    $scope.$watch(function () { return currentModelService.getDisplayedComponent(); }, function (newComponent) {
+
+        if (newComponent){
+        	// update the data
+        	$scope.title = newComponent.name;
+        	$scope.displayed = newComponent;
+        } 
+    });
 
 }]);
 

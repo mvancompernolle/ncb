@@ -5,16 +5,254 @@
 
     <!-- Tab bar menu buttons for Cell group Parameters, Model Parameters, User Parameters -->
     <div id="groupName" class="panel-heading ncb-heading">
-        
+        <div id="currentModelName">
+            {{ '{{title || "Parameters"}}' }}
+        </div>        
     </div>
     <!-- end tab bar menu buttons -->
 
     <!-- Accordion -->
     <div class="panel-body">
-        
+        <div class="panel-group" id="accordion">
+
+            <div class="panel panel-default" ng-show="displayed.classification == 'cellGroup'">
+                <div class="panel-heading">
+                    <h4 class="panel-title" >
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse0" style="display:block">
+                            CellGroup Parameters
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse0" class="panel-collapse collapse in">
+                        <div class="col-lg-4">
+                          <div class="row"><a class="list-group-item"> CellGroup Name: </a></div>
+                          <div class="row"><a class="list-group-item"> Quantity: </a></div>
+                          <div class="row"><a class="list-group-item"> Geometry: </a></div>
+                        </div>
+                        <div class="col-lg-8">
+                          <div class="row"><a class="list-group-item"> {{ '{{title}}' }} </a></div>
+                          <div class="row"><a class="list-group-item"> {{ '{{displayed.num'}} }} </a></div>
+                          <div class="row"><a class="list-group-item"> {{ '{{displayed.geometry}}' }} </a></div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" style="overflow:visible" ng-show="displayed.classification == 'cellGroup' || displayed.classification == 'cell'">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="display:block">
+                            Cell Parameters
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="col-lg-4">
+                        <div id="parameters">
+                            <div id="izParam" ng-show="displayed.type == 'Izhikevich'">
+                                <div class="row"><a class="list-group-item"> Model Name: </a></div>
+                                <div class="row"><a class="list-group-item"> Model Type: </a></div>
+                                <div class="row"><a class="list-group-item"> <span style="text-decoration: underline;">Parameter Name</span></a></div>
+                                <div class="row"><a class="list-group-item"> A: </a></div>
+                                <div class="row"><a class="list-group-item"> B: </a></div>
+                                <div class="row"><a class="list-group-item"> C: </a></div>
+                                <div class="row"><a class="list-group-item"> D: </a></div>
+                                <div class="row"><a class="list-group-item"> U: </a></div>
+                                <div class="row"><a class="list-group-item"> V: </a></div>
+                                <div class="row"><a class="list-group-item"> Threshold: </a></div>
+                            </div>
+                            <div id="ncsParam" ng-show="displayed.type == 'NCS'">
+                                <div class="row"><a class="list-group-item"> Model Name: </a></div>
+                                <div class="row"><a class="list-group-item"> Model Type: </a></div>
+                                <div class="row"><a class="list-group-item"> <span style="text-decoration: underline;">Parameter Name</span></a></div>
+                                <div class="row"><a class="list-group-item"> Threshold: </a></div>
+                                <div class="row"><a class="list-group-item"> Resting Potential: </a></div>
+                                <div class="row"><a class="list-group-item"> Calcium: </a></div>
+                                <div class="row"><a class="list-group-item"> Calc. Spike Incr.: </a></div>
+                                <div class="row"><a class="list-group-item"> Tau Calcium: </a></div>
+                                <div class="row"><a class="list-group-item"> Leak Reversal Pot.: </a></div>
+                                <div class="row"><a class="list-group-item"> Tau Membrane: </a></div>
+                                <div class="row"><a class="list-group-item"> R Membrane: </a></div>
+                                <div class="row"><a class="list-group-item"> Spike Shape: </a></div>
+                            </div>
+                            <div id="hhParam" ng-show="displayed.type == 'HodgkinHuxley'">
+                                <div class="row"><a class="list-group-item"> Model Name: </a></div>
+                                <div class="row"><a class="list-group-item"> Model Type: </a></div>
+                                <div class="row"><a class="list-group-item"> <span style="text-decoration: underline;">Parameter Name</span></a></div>
+                                <div class="row"><a class="list-group-item"> Threshold: </a></div>
+                                <div class="row"><a class="list-group-item"> Resting Potential: </a></div>
+                                <div class="row"><a class="list-group-item"> Capacitance: </a></div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="col-lg-8">
+
+                            <!-- Izhikevich Cell Parameters -->
+                            <div ng-show="displayed.type == 'Izhikevich'">
+                                <div class="row"><a class="list-group-item"> {{ '{{displayed.name'}} }} </a></div>
+                                <div class="row"><a class="list-group-item"> {{ '{{displayed.type'}} }} </a></div>
+
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> Type: </a>
+                                  <a class="col-lg-3 list-group-item"> Value: </a>
+                                  <a class="col-lg-3 list-group-item"> Min: </a>
+                                  <a class="col-lg-3 list-group-item"> Max: </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.a.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.a.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.a.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.a.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.b.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.b.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.b.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.b.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.c.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.c.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.c.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.c.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.d.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.d.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.d.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.d.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.u.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.u.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.u.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.u.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.v.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.v.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.v.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.v.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.maxValue'}} }} </a>  
+                                </div>
+                            </div>
+                            <!-- End Izhikevich Cell Parameters -->
+
+
+                            <!-- NCS Cell Parameters -->
+                            <div ng-show="displayed.type == 'NCS'">
+                                <div class="row"><a class="list-group-item"> {{ '{{displayed.name'}} }} </a></div>
+                                <div class="row"><a class="list-group-item"> {{ '{{displayed.type'}} }} </a></div>
+
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> Type: </a>
+                                  <a class="col-lg-3 list-group-item"> Value: </a>
+                                  <a class="col-lg-3 list-group-item"> Min: </a>
+                                  <a class="col-lg-3 list-group-item"> Max: </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calcium.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calcium.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calcium.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calcium.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calciumSpikeIncrement.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calciumSpikeIncrement.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calciumSpikeIncrement.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calciumSpikeIncrement.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauCalcium.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauCalcium.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauCalcium.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauCalcium.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.leakReversalPotential.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.leakReversalPotential.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.leakReversalPotential.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.leakReversalPotential.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauMembrane.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauMembrane.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauMembrane.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauMembrane.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.rMembrane.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.rMembrane.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.rMembrane.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.rMembrane.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.spikeShape.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.spikeShape.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.spikeShape.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.spikeShape.maxValue'}} }} </a>  
+                                </div>
+
+                            </div>
+                            <!-- End NCS Cell Parameters -->
+
+                            <!-- HodgkinHuxley Cell Parameters -->
+                            <div ng-show="displayed.type == 'HodgkinHuxley'">
+                                <div class="row"><a class="list-group-item"> {{ '{{displayed.name'}} }} </a></div>
+                                <div class="row"><a class="list-group-item"> {{ '{{displayed.type'}} }} </a></div>
+
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> Type: </a>
+                                  <a class="col-lg-3 list-group-item"> Value: </a>
+                                  <a class="col-lg-3 list-group-item"> Min: </a>
+                                  <a class="col-lg-3 list-group-item"> Max: </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.maxValue'}} }} </a>  
+                                </div>
+                                <div class="row">
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.capacitance.type'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.capacitance.value'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.capacitance.minValue'}} }} </a>
+                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.capacitance.maxValue'}} }} </a>  
+                                </div>
+                            </div>
+                            <!-- End HodgkinHuxley Cell Parameters -->
+
+                        </div>
+                    </div>
+
+            </div>
+
+        </div>    
     </div>
 </div>
-    <!-- end Accordion -->
+<!-- end Accordion -->
     
 
 

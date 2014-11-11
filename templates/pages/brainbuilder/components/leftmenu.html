@@ -19,33 +19,30 @@
 	
 	<!-- filtering is done here -->
 	<div class="panel-body" >
-		<div ng-repeat="model in modelCtrl.getComponents()">
-          <div ng-style="modelCtrl.styleElement(model)" class="list-group-item ncb-cell-list-item" ng-dblclick="modelCtrl.selectComponent(model, $index)">
-              <div class="row">
-                  <div class="col-lg-12">
-                      <a class="ncb-cell-name-txt ncb-list-text-color" href="">{{ '{{model.name}}' }} <button type="button" ng-click="modelCtrl.removeModel(model)" class="btn btn-xs btn-danger pull-right">x</button></a>
-                  </div>
-              </div>
-              <div class="row ncb-default-blank-row">
-                  <div class="col-lg-12 ">
-                      <a ng-show="model.classification == 'cell'" class="ncb-cell-type-txt" href="">{{ '{{model.type}}' }}</a>
-                      <a ng-show="model.classification == 'cellGroup'" class="ncb-cell-type-txt" href="">Cell Group</a>
-                      <a ng-show="model.classification == 'model'" class="ncb-cell-type-txt" href="">Model</a>
-                  </div>
-              </div>
+
+    <span class="label label-default" ng-show="modelCtrl.getComponents().length > 0" style="display:block;">Model Components</span>
+
+    <div class="list-group" id="currentModelComponents">
+      <li ng-repeat="model in modelCtrl.getComponents()" class="row list-group-item ncb-cell-list-item ncb-item-center"  data-ng-dblclick="modelCtrl.selectComponent(model, $index)" data-ng-click="modelCtrl.displayParameters(model)" ng-style="modelCtrl.styleElement(model)">
+          <div class="col-lg-10">
+            <div class="row">
+              <a class="ncb-cell-name-txt ncb-list-text-color" href="">{{ '{{model.name}}' }}</a>
+            </div>
+            <div class="row">
+              <a ng-show="model.classification == 'cell'" class="ncb-cell-type-txt" href="">{{ '{{model.type}}' }}</a>
+              <a ng-show="model.classification == 'cellGroup'" class="ncb-cell-type-txt" href="">Cell Group</a>
+              <a ng-show="model.classification == 'model'" class="ncb-cell-type-txt" href="">Model</a>
+            </div>
           </div>
-						
-		</div>
-	</div>
-	<!-- end filtering -->
-	
+          <div class="col-lg-2 ncb-remove-component-btn">
+              <div class="row"><button type="button" ng-click="modelCtrl.removeModel(model)" class="btn btn-xs btn-danger pull-right">x</button></div>
+          </div>
+      </li>
+    </div>
+
+    <span class="label label-default" ng-show="modelCtrl.getComponents().length > 0" style="display:block;">Model Connections</span>
+    <div class="list-group" id="currentModelConnections">
+    </div>
+  </div>
 </div>
 <!-- end current model list -->
-
-  <!--        <div class="col-lg-12" id="subComponents" ng-show="data.classification != 'cell' && data.cellGroups.length > 0">
-        <a class="list-group-item ncb-cell-list-item" ng-style="sideCtrl.styleElement(group)" ng-show="data.classification != 'cell'" ng-repeat="group in data.cellGroups" ng-dblclick="sideCtrl.selectComponent(group, $index)">
-                    <p class="ncb-cell-name-txt ncb-list-text-color" href="">{{ '{{group.name}}' }}</p>
-                    <h4 ng-show="group.classification == 'cell'"class="ncb-cell-type-txt" href="">{{ '{{group.type}}' }}</h4>
-                    <h4 ng-show="group.classification == 'cellGroup'"class="ncb-cell-type-txt" href="">Cell Group</h4>
-        </a>
-          </div> -->

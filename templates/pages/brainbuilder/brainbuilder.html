@@ -1,5 +1,5 @@
 <!-- Main Div for containing the Model Builder page -->
-<div id="model" class="container" ng-controller="ModelBuilderController as modelCtrl">
+<div id="model" class="container">
     
     <!-- Model Configuration Header -->
     <div class="page-header">
@@ -19,10 +19,10 @@
 
 	<!-- Modularization of Each Element of the page broken up into pieces -->
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4" data-ng-controller="ModelBuilderController as modelCtrl">
             {% include 'pages/brainbuilder/components/leftmenu.html' %}
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-8" data-ng-controller="ModelParametersController as mParamsCtrl">
             {% include 'pages/brainbuilder/components/rightmenu.html' %}
         </div>
     </div>

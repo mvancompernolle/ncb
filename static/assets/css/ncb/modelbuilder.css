@@ -5,3 +5,22 @@
 #addCellGroup {
 	margin-right: 5px;
 }
+
+#currentModelComponents{
+	height: 200px;
+	overflow: auto;
+}
+
+#currentModelConnections{
+	height: 200px;
+	overflow: auto;
+}
+
+
+.ncb-params-left{
+	padding-right: 0px;
+}
+
+.ncb-params-right{
+	padding-left: 0px;
+}

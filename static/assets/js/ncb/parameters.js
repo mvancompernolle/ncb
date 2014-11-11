@@ -3,7 +3,7 @@ function model() {
 	this.classification = "model";
 	this.description = "";
 	this.author = "";
-	this.cellGroups = [];
+	this.baseCellGroups = new baseCellGroup();
 	this.cellAliases = [];
 	this.synapses = [];
 
@@ -135,8 +135,13 @@ function cellGroup(name, num, modelParameters, geometry) {
 	this.classification = "cellGroup";
 	this.name = name;
 	this.num = num;
-	this.modelParameters = modelParameters;
+	this.parameters = modelParameters;
 	this.geometry = geometry;
+	this.cellGroups = [];
+}
+
+function baseCellGroup(){
+	this.classification = "baseCellGroup";
 	this.cellGroups = [];
 }
 

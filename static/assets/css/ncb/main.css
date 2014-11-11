@@ -71,6 +71,16 @@
   cursor: pointer; cursor: hand;
 }
 
+.ncb-item-center{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.ncb-remove-component-btn{
+  padding: 8px;
+  text-align: center;
+}
+
 .ncb-cell-type-txt {
   font-size: 10px;
   padding: 0px;

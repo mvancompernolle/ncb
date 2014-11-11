@@ -144,20 +144,20 @@ ncbApp.factory('ColorService', function($rootScope){
 		// style element based off type (cell, cell group, model)
 		if (model.classification === 'cell'){
 			return {
-                'background-image': 'linear-gradient(left, '+this.colors.cell+', '+this.colors.cell+' 5%, transparent 5%, transparent 100%)',
-                'background-image': '-webkit-linear-gradient(left, '+this.colors.cell+', '+this.colors.cell+' 5%, transparent 5%, transparent 100%)',
+                'background-image': 'linear-gradient(left, '+this.colors.cell+', '+this.colors.cell+' 10px, transparent 10px, transparent 100%)',
+                'background-image': '-webkit-linear-gradient(left, '+this.colors.cell+', '+this.colors.cell+' 10px, transparent 10px, transparent 100%)',
             };
 		}
 		else if (model.classification === 'cellGroup'){
 			return {
-                'background-image': 'linear-gradient(left, '+this.colors.cellGroup+', '+this.colors.cellGroup+' 5%, transparent 5%, transparent 100%)',
-                'background-image': '-webkit-linear-gradient(left, '+this.colors.cellGroup+', '+this.colors.cellGroup+' 5%, transparent 5%, transparent 100%)',
+                'background-image': 'linear-gradient(left, '+this.colors.cellGroup+', '+this.colors.cellGroup+' 10px, transparent 10px, transparent 100%)',
+                'background-image': '-webkit-linear-gradient(left, '+this.colors.cellGroup+', '+this.colors.cellGroup+' 10px, transparent 10px, transparent 100%)',
             };
 		}
 		else if (model.classification === 'model'){
 			return {
-                'background-image': 'linear-gradient(left, '+this.colors.model+', '+this.colors.model+' 5%, transparent 5%, transparent 100%)',
-                'background-image': '-webkit-linear-gradient(left, '+this.colors.model+', '+this.colors.model+' 5%, transparent 5%, transparent 100%)',
+                'background-image': 'linear-gradient(left, '+this.colors.model+', '+this.colors.model+' 10px, transparent 10px, transparent 100%)',
+                'background-image': '-webkit-linear-gradient(left, '+this.colors.model+', '+this.colors.model+' 10px, transparent 10px, transparent 100%)',
             };
 		}
 	}
@@ -174,7 +174,8 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 	currentModelService.currentModel = new model();
 
 	currentModelService.breadCrumbs = [{name: "Home", index: 0}];
-	currentModelService.component = currentModelService.currentModel.cellGroups;
+	currentModelService.selected = currentModelService.currentModel.baseCellGroups;
+	currentModelService.displayedComponent;
 
 	currentModelService.setName = function(name){
 		this.currentModel.name = name;
@@ -182,18 +183,18 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 
 	currentModelService.addToModel = function(model){
 		// add component if not already in the current model
-		var index = getCellIndex(this.component, model.name);
+		var index = getCellIndex(this.selected.cellGroups, model.name);
 
-		if(this.component.length === 0 || index === -1){
-			this.component.push(model);
+		if(this.selected.cellGroups.length === 0 || index === -1){
+			this.selected.cellGroups.push(model);
 		}
 	};
 
 	currentModelService.removeModel = function(model){
 		// remove model if found
-		var myIndex = getCellIndex(this.component, model.name)
+		var myIndex = getCellIndex(this.selected.cellGroups, model.name)
 		if(myIndex != -1){
-			this.component.splice(myIndex, 1);
+			this.selected.cellGroups.splice(myIndex, 1);
 		}
 	};
 
@@ -207,14 +208,14 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 		// set component to sub component if a cell group is selected
 		if(component.classification == "cellGroup"){
 			// set current component and create breadcrumb for it
-			this.component = component.cellGroups;
+			this.selected = component;
 			this.breadCrumbs.push({name: component.name, index: index});
 		}
 	};
 
 	currentModelService.goHome = function(){
 		this.breadCrumbs = [{name: "Home", index: 0}];
-		this.component = this.currentModel.cellGroups;
+		this.selected = this.currentModel.baseCellGroups;
 	};
 
 	currentModelService.goToBreadCrumb = function(index){
@@ -227,17 +228,16 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 		else if(index < this.breadCrumbs.length){
 
 			// go down the first layer (starts at 1 : home has a useless index)
-			this.component = this.currentModel.cellGroups[this.breadCrumbs[1].index].cellGroups;
-
-			//alert(this.component.name);
+			this.selected = this.currentModel.baseCellGroups.cellGroups[this.breadCrumbs[1].index];
 
 			// go down each following layer index you hit the bread crumb index
 			var setIndex;
-			for(var i=2; i<index; i++){
+
+			for(var i=2; i<=index; i++){
+
+				// go down to the next level (components is always an array of cell groups / components[i] is a cellGroup class)
 				setIndex = this.breadCrumbs[i].index;
-				alert(setIndex);
-				this.component = this.component.cellGroups[setIndex].cellGroups;
-				//alert(this.component.name);
+				this.selected = this.selected.cellGroups[setIndex];
 			}
 
 			// shorten breadcrumbs to selected index
@@ -248,12 +248,21 @@ ncbApp.factory('CurrentModelService', function($rootScope){
 	// get bread crumbs
 	currentModelService.getBreadCrumbs = function(){
 		return this.breadCrumbs;
-	}
+	};
 
 	currentModelService.getData = function(){
-		return this.component;
+		return this.selected.cellGroups;
 	};
+
 	// end bread crumb functions ////////////////////////////////////////////
+
+	currentModelService.setDisplayedComponent = function(component){
+		this.displayedComponent = component;
+	}
+
+	currentModelService.getDisplayedComponent = function(component){
+		return this.displayedComponent;
+	}
 
 	return currentModelService;
 });
