@@ -119,6 +119,10 @@
   width: 100%;
 }
 
+.editable-input{
+  width: 100%;
+}
+
 #subComponents{
   margin-bottom: 16px;
   max-height: 35%;

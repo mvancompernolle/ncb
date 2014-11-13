@@ -59,6 +59,18 @@ ncbApp.controller("ModelParametersController", ['$scope', 'CurrentModelService',
 
 	$scope.displayed = currentModelService.getDisplayedComponent();
 
+	// param types
+	$scope.types = [
+		{value: "exact", text: "exact"},
+		{value: "uniform", text: "uniform"},
+		{value: "normal", text: "normal"}
+	];
+
+	$scope.showType = function() {
+		var selected = $filter('filter')($scope.statuses, {value: $scope.displayed.a.type});
+		return ($scope.displayed.a.type && selected.length) ? selected[0].text : 'Not set';
+	};
+
 	// update component show if changed
     $scope.$watch(function () { return currentModelService.getDisplayedComponent(); }, function (newComponent) {
 

@@ -16,6 +16,25 @@
 	overflow: auto;
 }
 
+#parameters{
+	overflow: auto;
+}
+
+.ncb-very-large-column{
+	width: 30%;
+}
+
+.ncb-large-column{
+	width: 30%;
+}
+
+.ncb-table{
+	margin: 0px;
+}
+
+.ncb-small-column{
+	max-width: 10%;
+}
 
 .ncb-params-left{
 	padding-right: 0px;

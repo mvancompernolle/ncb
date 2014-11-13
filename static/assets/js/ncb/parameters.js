@@ -131,10 +131,11 @@ function cell(name, type, parameters) {
 	this.parameters = parameters;
 }
 
-function cellGroup(name, num, modelParameters, geometry) {
+function cellGroup(name, num, modelParameters, type, geometry) {
 	this.classification = "cellGroup";
 	this.name = name;
 	this.num = num;
+	this.type = type;
 	this.parameters = modelParameters;
 	this.geometry = geometry;
 	this.cellGroups = [];

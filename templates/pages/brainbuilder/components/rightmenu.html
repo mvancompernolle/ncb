@@ -24,20 +24,24 @@
                     </h4>
                 </div>
                 <div id="collapse0" class="panel-collapse collapse in">
-                        <div class="col-lg-4">
-                          <div class="row"><a class="list-group-item"> CellGroup Name: </a></div>
-                          <div class="row"><a class="list-group-item"> Quantity: </a></div>
-                          <div class="row"><a class="list-group-item"> Geometry: </a></div>
-                        </div>
-                        <div class="col-lg-8">
-                          <div class="row"><a class="list-group-item"> {{ '{{title}}' }} </a></div>
-                          <div class="row"><a class="list-group-item"> {{ '{{displayed.num'}} }} </a></div>
-                          <div class="row"><a class="list-group-item"> {{ '{{displayed.geometry}}' }} </a></div>
-                        </div>
+                  <table class="table table-bordered table-hover table-condensed ncb-table">
+                    <tr>
+                      <td colspan="1"><span>CellGroup Name:</span></td>
+                      <td colspan="1" editable-text="displayed.name" buttons="no"><span>{{ '{{displayed.name}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="1"><span>Quantity:</span></td>
+                      <td colspan="1"><span>{{ '{{displayed.num}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="1"><span>Geometry:</span></td>
+                      <td colspan="1"><span>{{ '{{displayed.geometry}}' }}</span></td>
+                    </tr>
+                  </table>
                 </div>
             </div>
 
-            <div class="panel panel-default" style="overflow:visible" ng-show="displayed.classification == 'cellGroup' || displayed.classification == 'cell'">
+            <div class="panel panel-default" ng-show="displayed.classification == 'cellGroup' || displayed.classification == 'cell'">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="display:block">
@@ -45,207 +49,203 @@
                         </a>
                     </h4>
                 </div>
+
                 <div id="collapse1" class="panel-collapse collapse in">
-                    <div class="col-lg-4">
-                        <div id="parameters">
-                            <div id="izParam" ng-show="displayed.type == 'Izhikevich'">
-                                <div class="row"><a class="list-group-item"> Model Name: </a></div>
-                                <div class="row"><a class="list-group-item"> Model Type: </a></div>
-                                <div class="row"><a class="list-group-item"> <span style="text-decoration: underline;">Parameter Name</span></a></div>
-                                <div class="row"><a class="list-group-item"> A: </a></div>
-                                <div class="row"><a class="list-group-item"> B: </a></div>
-                                <div class="row"><a class="list-group-item"> C: </a></div>
-                                <div class="row"><a class="list-group-item"> D: </a></div>
-                                <div class="row"><a class="list-group-item"> U: </a></div>
-                                <div class="row"><a class="list-group-item"> V: </a></div>
-                                <div class="row"><a class="list-group-item"> Threshold: </a></div>
-                            </div>
-                            <div id="ncsParam" ng-show="displayed.type == 'NCS'">
-                                <div class="row"><a class="list-group-item"> Model Name: </a></div>
-                                <div class="row"><a class="list-group-item"> Model Type: </a></div>
-                                <div class="row"><a class="list-group-item"> <span style="text-decoration: underline;">Parameter Name</span></a></div>
-                                <div class="row"><a class="list-group-item"> Threshold: </a></div>
-                                <div class="row"><a class="list-group-item"> Resting Potential: </a></div>
-                                <div class="row"><a class="list-group-item"> Calcium: </a></div>
-                                <div class="row"><a class="list-group-item"> Calc. Spike Incr.: </a></div>
-                                <div class="row"><a class="list-group-item"> Tau Calcium: </a></div>
-                                <div class="row"><a class="list-group-item"> Leak Reversal Pot.: </a></div>
-                                <div class="row"><a class="list-group-item"> Tau Membrane: </a></div>
-                                <div class="row"><a class="list-group-item"> R Membrane: </a></div>
-                                <div class="row"><a class="list-group-item"> Spike Shape: </a></div>
-                            </div>
-                            <div id="hhParam" ng-show="displayed.type == 'HodgkinHuxley'">
-                                <div class="row"><a class="list-group-item"> Model Name: </a></div>
-                                <div class="row"><a class="list-group-item"> Model Type: </a></div>
-                                <div class="row"><a class="list-group-item"> <span style="text-decoration: underline;">Parameter Name</span></a></div>
-                                <div class="row"><a class="list-group-item"> Threshold: </a></div>
-                                <div class="row"><a class="list-group-item"> Resting Potential: </a></div>
-                                <div class="row"><a class="list-group-item"> Capacitance: </a></div>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="col-lg-8">
 
-                            <!-- Izhikevich Cell Parameters -->
-                            <div ng-show="displayed.type == 'Izhikevich'">
-                                <div class="row"><a class="list-group-item"> {{ '{{displayed.name'}} }} </a></div>
-                                <div class="row"><a class="list-group-item"> {{ '{{displayed.type'}} }} </a></div>
+                  <!-- Izhikevich Cell Parameters -->
+                  <table class="table table-bordered table-hover table-condensed ncb-table" ng-show="displayed.type == 'Izhikevich'">
+                    <tr>
+                      <td colspan="2"><span>Name:</span></td>
+                      <td colspan="4"><span>{{ '{{displayed.name}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Type:</span></td>
+                      <td colspan="4"><span>{{ '{{displayed.type}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>ParameterName:</span></td>
+                      <td colspan="1"><span>Type:</span></td>
+                      <td colspan="1"><span>Value:</span></td>
+                      <td colspan="1"><span>Min:</span></td>
+                      <td colspan="1"><span>Max:</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>A:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.a.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.a.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.a.value" buttons="no"><span>{{ '{{displayed.parameters.a.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.a.minValue" buttons="no"><span>{{ '{{displayed.parameters.a.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.a.maxValue" buttons="no"><span>{{ '{{displayed.parameters.a.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>B:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.b.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.b.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.b.value" buttons="no"><span>{{ '{{displayed.parameters.b.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.b.minValue" buttons="no"><span>{{ '{{displayed.parameters.b.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.b.maxValue" buttons="no"><span>{{ '{{displayed.parameters.b.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>C:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.c.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.c.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.c.value" buttons="no"><span>{{ '{{displayed.parameters.c.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.c.minValue" buttons="no"><span>{{ '{{displayed.parameters.c.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.c.maxValue" buttons="no"><span>{{ '{{displayed.parameters.c.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>D:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.d.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.d.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.d.value" buttons="no"><span>{{ '{{displayed.parameters.d.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.d.minValue" buttons="no"><span>{{ '{{displayed.parameters.d.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.d.maxValue" buttons="no"><span>{{ '{{displayed.parameters.d.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>U:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.u.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.u.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.u.value" buttons="no"><span>{{ '{{displayed.parameters.u.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.u.minValue" buttons="no"><span>{{ '{{displayed.parameters.u.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.u.maxValue" buttons="no"><span>{{ '{{displayed.parameters.u.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>V:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.v.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.v.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.v.value" buttons="no"><span>{{ '{{displayed.parameters.v.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.v.minValue" buttons="no"><span>{{ '{{displayed.parameters.v.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.v.maxValue" buttons="no"><span>{{ '{{displayed.parameters.v.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Threshold:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.threshold.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.threshold.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.threshold.value" buttons="no"><span>{{ '{{displayed.parameters.threshold.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.threshold.minValue" buttons="no"><span>{{ '{{displayed.parameters.threshold.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.threshold.maxValue" buttons="no"><span>{{ '{{displayed.parameters.threshold.maxValue}}' }}</span></td>
+                    </tr>
+                  </table>
+                  <!-- End Izhikevich Cell Parameters -->
 
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> Type: </a>
-                                  <a class="col-lg-3 list-group-item"> Value: </a>
-                                  <a class="col-lg-3 list-group-item"> Min: </a>
-                                  <a class="col-lg-3 list-group-item"> Max: </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.a.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.a.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.a.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.a.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.b.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.b.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.b.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.b.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.c.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.c.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.c.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.c.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.d.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.d.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.d.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.d.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.u.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.u.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.u.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.u.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.v.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.v.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.v.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.v.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.maxValue'}} }} </a>  
-                                </div>
-                            </div>
-                            <!-- End Izhikevich Cell Parameters -->
+                  <!-- NCS Cell Parameters -->
+                  <table class="table table-bordered table-hover table-condensed ncb-table" ng-show="displayed.type == 'NCS'">
+                    <tr>
+                      <td colspan="2"><span>Name:</span></td>
+                      <td colspan="4"><span>{{ '{{displayed.name}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Type:</span></td>
+                      <td colspan="4"><span>{{ '{{displayed.type}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>ParameterName:</span></td>
+                      <td colspan="1"><span>Type:</span></td>
+                      <td colspan="1"><span>Value:</span></td>
+                      <td colspan="1"><span>Min:</span></td>
+                      <td colspan="1"><span>Max:</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Threshold:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.threshold.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.threshold.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.threshold.value" buttons="no"><span>{{ '{{displayed.parameters.threshold.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.threshold.minValue" buttons="no"><span>{{ '{{displayed.parameters.threshold.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.threshold.maxValue" buttons="no"><span>{{ '{{displayed.parameters.threshold.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Resting Potential:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.restingPotential.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.restingPotential.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.restingPotential.value" buttons="no"><span>{{ '{{displayed.parameters.restingPotential.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.restingPotential.minValue" buttons="no"><span>{{ '{{displayed.parameters.restingPotential.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.restingPotential.maxValue" buttons="no"><span>{{ '{{displayed.parameters.restingPotential.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Calcium:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.calcium.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.calcium.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.calcium.value" buttons="no"><span>{{ '{{displayed.parameters.calcium.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.calcium.minValue" buttons="no"><span>{{ '{{displayed.parameters.calcium.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.calcium.maxValue" buttons="no"><span>{{ '{{displayed.parameters.calcium.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Calc. Spike Incr.:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.calciumSpikeIncrement.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.calciumSpikeIncrement.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.calciumSpikeIncrement.value" buttons="no"><span>{{ '{{displayed.parameters.calciumSpikeIncrement.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.calciumSpikeIncrement.minValue" buttons="no"><span>{{ '{{displayed.parameters.calciumSpikeIncrement.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.calciumSpikeIncrement.maxValue" buttons="no"><span>{{ '{{displayed.parameters.calciumSpikeIncrement.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Tau Calcium:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.tauCalcium.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.tauCalcium.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.tauCalcium.value" buttons="no"><span>{{ '{{displayed.parameters.tauCalcium.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.tauCalcium.minValue" buttons="no"><span>{{ '{{displayed.parameters.tauCalcium.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.tauCalcium.maxValue" buttons="no"><span>{{ '{{displayed.parameters.tauCalcium.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Leak Reversal Pot.:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.leakReversalPotential.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.leakReversalPotential.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.leakReversalPotential.value" buttons="no"><span>{{ '{{displayed.parameters.leakReversalPotential.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.leakReversalPotential.minValue" buttons="no"><span>{{ '{{displayed.parameters.leakReversalPotential.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.leakReversalPotential.maxValue" buttons="no"><span>{{ '{{displayed.parameters.leakReversalPotential.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Tau Membrane:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.tauMembrane.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.tauMembrane.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.tauMembrane.value" buttons="no"><span>{{ '{{displayed.parameters.tauMembrane.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.tauMembrane.minValue" buttons="no"><span>{{ '{{displayed.parameters.tauMembrane.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.tauMembrane.maxValue" buttons="no"><span>{{ '{{displayed.parameters.tauMembrane.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>R Membrane:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.rMembrane.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.rMembrane.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.rMembrane.value" buttons="no"><span>{{ '{{displayed.parameters.rMembrane.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.rMembrane.minValue" buttons="no"><span>{{ '{{displayed.parameters.rMembrane.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.rMembrane.maxValue" buttons="no"><span>{{ '{{displayed.parameters.rMembrane.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Spike Shape:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.spikeShape.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.spikeShape.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.spikeShape.value" buttons="no"><span>{{ '{{displayed.parameters.spikeShape.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.spikeShape.minValue" buttons="no"><span>{{ '{{displayed.parameters.spikeShape.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.spikeShape.maxValue" buttons="no"><span>{{ '{{displayed.parameters.spikeShape.maxValue}}' }}</span></td>
+                    </tr>
+                  </table>
+                  <!-- End NCS Cell Parameters -->
 
+                  <!-- HodgkinHuxley Cell Parameters -->
+                  <table class="table table-bordered table-hover table-condensed ncb-table" ng-show="displayed.type == 'HodgkinHuxley'">
+                    <tr>
+                      <td colspan="2"><span>Name:</span></td>
+                      <td colspan="4"><span>{{ '{{displayed.name}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Type:</span></td>
+                      <td colspan="4"><span>{{ '{{displayed.type}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>ParameterName:</span></td>
+                      <td colspan="1"><span>Type:</span></td>
+                      <td colspan="1"><span>Value:</span></td>
+                      <td colspan="1"><span>Min:</span></td>
+                      <td colspan="1"><span>Max:</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Threshold:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.threshold.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.threshold.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.threshold.value" buttons="no"><span>{{ '{{displayed.parameters.threshold.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.threshold.minValue" buttons="no"><span>{{ '{{displayed.parameters.threshold.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.threshold.maxValue" buttons="no"><span>{{ '{{displayed.parameters.threshold.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Resting Potential:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.restingPotential.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.restingPotential.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.restingPotential.value" buttons="no"><span>{{ '{{displayed.parameters.restingPotential.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.restingPotential.minValue" buttons="no"><span>{{ '{{displayed.parameters.restingPotential.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.restingPotential.maxValue" buttons="no"><span>{{ '{{displayed.parameters.restingPotential.maxValue}}' }}</span></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><span>Capicitance:</span></td>
+                      <td colspan="1" editable-select="displayed.parameters.capacitance.type" e-ng-options="s.value as s.text for s in types" buttons="no"><span>{{ '{{displayed.parameters.capacitance.type}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.capacitance.value" buttons="no"><span>{{ '{{displayed.parameters.capacitance.value}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.capacitance.minValue" buttons="no"><span>{{ '{{displayed.parameters.capacitance.minValue}}' }}</span></td>
+                      <td colspan="1" editable-text="displayed.parameters.capacitance.maxValue" buttons="no"><span>{{ '{{displayed.parameters.capacitance.maxValue}}' }}</span></td>
+                    </tr>
+                  </table>
+                  <!-- End HodgkinHuxley Cell Parameters -->
+                </div>
 
-                            <!-- NCS Cell Parameters -->
-                            <div ng-show="displayed.type == 'NCS'">
-                                <div class="row"><a class="list-group-item"> {{ '{{displayed.name'}} }} </a></div>
-                                <div class="row"><a class="list-group-item"> {{ '{{displayed.type'}} }} </a></div>
-
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> Type: </a>
-                                  <a class="col-lg-3 list-group-item"> Value: </a>
-                                  <a class="col-lg-3 list-group-item"> Min: </a>
-                                  <a class="col-lg-3 list-group-item"> Max: </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calcium.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calcium.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calcium.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calcium.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calciumSpikeIncrement.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calciumSpikeIncrement.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calciumSpikeIncrement.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.calciumSpikeIncrement.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauCalcium.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauCalcium.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauCalcium.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauCalcium.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.leakReversalPotential.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.leakReversalPotential.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.leakReversalPotential.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.leakReversalPotential.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauMembrane.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauMembrane.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauMembrane.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.tauMembrane.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.rMembrane.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.rMembrane.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.rMembrane.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.rMembrane.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.spikeShape.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.spikeShape.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.spikeShape.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.spikeShape.maxValue'}} }} </a>  
-                                </div>
-
-                            </div>
-                            <!-- End NCS Cell Parameters -->
-
-                            <!-- HodgkinHuxley Cell Parameters -->
-                            <div ng-show="displayed.type == 'HodgkinHuxley'">
-                                <div class="row"><a class="list-group-item"> {{ '{{displayed.name'}} }} </a></div>
-                                <div class="row"><a class="list-group-item"> {{ '{{displayed.type'}} }} </a></div>
-
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> Type: </a>
-                                  <a class="col-lg-3 list-group-item"> Value: </a>
-                                  <a class="col-lg-3 list-group-item"> Min: </a>
-                                  <a class="col-lg-3 list-group-item"> Max: </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.threshold.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.restingPotential.maxValue'}} }} </a>  
-                                </div>
-                                <div class="row">
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.capacitance.type'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.capacitance.value'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.capacitance.minValue'}} }} </a>
-                                  <a class="col-lg-3 list-group-item"> {{ '{{displayed.parameters.capacitance.maxValue'}} }} </a>  
-                                </div>
-                            </div>
-                            <!-- End HodgkinHuxley Cell Parameters -->
-
-                        </div>
-                    </div>
 
             </div>
 
